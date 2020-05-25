@@ -30,6 +30,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/plugins/composition'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -37,6 +38,7 @@ export default {
   buildModules: [
     '@nuxt/typescript-build',
     '@nuxtjs/vuetify',
+    '@nuxtjs/tailwindcss'
   ],
   /*
   ** Nuxt.js modules
@@ -73,7 +75,8 @@ export default {
           success: colors.green.accent3
         }
       }
-    }
+    },
+    defaultAssets: { icons: 'fa' }
   },
   /*
   ** Build configuration
@@ -82,7 +85,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
-    extend (config, ctx) {
+    extend(config, ctx) {
     }
   }
 }

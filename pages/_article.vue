@@ -2,23 +2,29 @@
   <Article :data="article" type="article" />
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent, reactive, onMounted } from '@vue/composition-api'
+import usePosts from '~/composables/use-posts'
 import Article from '~/components/ArticlePage.vue'
-export default {
-  async asyncData({ app, store, params }) {
-    const { data } = await app.$axios.get(
-      `${process.env.WORDPRESS_API_URL}/wp/v2/posts`,
-      {
-        params: {
-          slug: params.article,
-          _embed: true
-        }
-      }
-    )
-    return { article: data[0] }
+
+export default defineComponent({
+  name: 'FooterMenu',
+  props: {
+    articleSlug: {
+      default: ''
+    }
   },
-  components: {
-    Article
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setup(props, ctx) {
+    const { getArticleData } = usePosts({ ctx })
+    let articleData = reactive({})
+
+    onMounted(async () => {
+      articleData = await getArticleData(props.articleSlug) // fetch main product
+    })
+
+    return {}
   }
-}
+})
 </script>
+

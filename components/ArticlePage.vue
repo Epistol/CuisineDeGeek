@@ -48,8 +48,8 @@
 </template>
 
 <script>
-import FeaturedImage from '~/components/FeaturedImage.vue'
-import Comments from '~/components/Comments'
+// import FeaturedImage from '~/components/FeaturedImage.vue'
+// import Comments from '~/components/Comments'
 
 export default {
   props: {
@@ -62,10 +62,10 @@ export default {
     longTimestamp: Function
   },
 
-  components: {
-    FeaturedImage,
-    Comments
-  },
+  // components: {
+  //   FeaturedImage,
+  //   Comments
+  // },
 
   data() {
     return {
@@ -102,8 +102,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/css/vars.scss';
-
 article {
   background-color: #efefef;
   display: flex;
@@ -173,7 +171,6 @@ article {
       }
 
       svg {
-        fill: $primary;
         height: 24px;
         opacity: 0.7;
         transition: 0.1s;
