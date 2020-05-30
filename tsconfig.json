@@ -13,6 +13,7 @@
     "sourceMap": true,
     "strict": true,
     "noEmit": true,
+    "resolveJsonModule": true,
     "experimentalDecorators": true,
     "baseUrl": ".",
     "paths": {
@@ -27,7 +28,8 @@
       "@types/node",
       "@nuxt/types",
       "@nuxtjs/axios",
-      "@nuxtjs/vuetify"
+      "@nuxtjs/vuetify",
+      "nuxt-i18n"
     ]
   },
   "exclude": [

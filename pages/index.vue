@@ -38,16 +38,15 @@ export default defineComponent({
     const {
       articles,
       article,
-      getArticlesList,
-      getMoreArticlesList
+      fetchArticlesList,
+      fetchMoreArticlesList
     } = usePosts({ ctx })
-    let articlesData = reactive({})
 
     onMounted(async () => {
-      articlesData = await getArticlesList() // fetch main product
+      await fetchArticlesList()
     })
 
-    return { articlesData, articles }
+    return { articles }
   }
 })
 </script>

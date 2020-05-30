@@ -1,5 +1,8 @@
 <template>
-  <Article :data="article" type="article" />
+  <div>
+    <p>oucou</p>
+    <Article :data="article" v-if="article" type="article" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -8,22 +11,19 @@ import usePosts from '~/composables/use-posts'
 import Article from '~/components/ArticlePage.vue'
 
 export default defineComponent({
-  name: 'FooterMenu',
-  props: {
-    articleSlug: {
-      default: ''
-    }
+  name: 'PageArticle',
+  components: {
+    Article
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
-    const { getArticleData } = usePosts({ ctx })
-    let articleData = reactive({})
-
+    const { fetchArticleForUserLang, article } = usePosts({ ctx })
+    const slug = ctx.root.$route.params?.article
     onMounted(async () => {
-      articleData = await getArticleData(props.articleSlug) // fetch main product
+      await fetchArticleForUserLang(slug)
     })
 
-    return {}
+    return { article }
   }
 })
 </script>

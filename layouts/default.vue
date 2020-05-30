@@ -1,7 +1,9 @@
 <template>
   <v-app :dark="goDark">
     <v-app-bar :clipped-left="true" fixed app>
-      <v-toolbar-title v-text="title" />
+      <nuxt-link :to="`/`">
+        <v-toolbar-title v-text="title" />
+      </nuxt-link>
       <v-spacer />
     </v-app-bar>
     <v-content>

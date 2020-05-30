@@ -1,5 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
-
+import i18n from './config/i18n'
 export default {
   mode: 'universal',
   /*
@@ -49,6 +49,10 @@ export default {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
+    [
+      'nuxt-i18n',
+      i18n,
+    ],
   ],
   /*
   ** Axios module configuration

@@ -18,24 +18,25 @@ export default function usePosts({ ctx }: Options) {
     article: {}
   })
 
-  const getArticlesList = async () => {
+  const fetchArticlesList = async () => {
     apiState.fetching = true
 
-    const { data } = await ctx.root.$axios.get(`${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/posts?orderby=date&per_page=10&_embed`,
+    const { data } = await ctx.root.$axios.get(
+      `${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/posts?orderby=date&per_page=10&_embed`,
       {
         params: {
           _embed: true
         }
-      },
+      }
     )
     globalState.articles = data
-    return data
   }
 
-  const getMoreArticlesList = async (infiniteLoadingPage: number) => {
+  const fetchMoreArticlesList = async (infiniteLoadingPage: number) => {
     apiState.fetching = true
 
-    const { data } = await ctx.root.$axios.get(`${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/posts`,
+    const { data } = await ctx.root.$axios.get(
+      `${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/posts`,
       {
         params: {
           orderby: 'date',
@@ -44,22 +45,32 @@ export default function usePosts({ ctx }: Options) {
           page: infiniteLoadingPage + 1,
           _embed: true
         }
-      },
+      }
     )
     globalState.articles = data
-    return data
   }
 
-  const getArticleData = async (articleSlug: string) => {
+  const fetchArticleForUserLang = async (articleSlug?: string, id?: number) => {
+    await fetchArticleData(articleSlug, id)
+    if (globalState.article[0].lang !== ctx.root.$i18n.locale) {
+      const articleIdLangMatch =
+        globalState.article[0].translations[ctx.root.$i18n.locale]
+      await fetchArticleData(undefined, articleIdLangMatch)
+    }
+  }
+
+  const fetchArticleData = async (articleSlug?: string, id?: number) => {
     apiState.fetching = true
 
-    const { data } = await ctx.root.$axios.get(`${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/posts`,
+    const { data } = await ctx.root.$axios.get(
+      `${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/posts`,
       {
         params: {
           slug: articleSlug,
+          id,
           _embed: true
         }
-      },
+      }
     )
     globalState.article = data
     return data
@@ -68,8 +79,8 @@ export default function usePosts({ ctx }: Options) {
   return {
     ...toRefs(apiState),
     ...toRefs(globalState),
-    getArticlesList,
-    getMoreArticlesList,
-    getArticleData,
+    fetchArticlesList,
+    fetchMoreArticlesList,
+    fetchArticleForUserLang
   }
 }
