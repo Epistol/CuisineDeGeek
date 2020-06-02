@@ -37,8 +37,8 @@ export default {
   */
   buildModules: [
     '@nuxt/typescript-build',
+    '@nuxtjs/tailwindcss',
     '@nuxtjs/vuetify',
-    '@nuxtjs/tailwindcss'
   ],
   /*
   ** Nuxt.js modules
@@ -66,7 +66,11 @@ export default {
   */
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
+    treeShake: true,
     theme: {
+      options: {
+        customProperties: true
+      },
       dark: true,
       themes: {
         dark: {
@@ -76,8 +80,12 @@ export default {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3
-        }
+          success: colors.green.accent3,
+          background: '#f8f8f8'
+        },
+        light: {
+          background: '#f8f8f8'
+        },
       }
     },
     defaultAssets: { icons: 'fa' }
