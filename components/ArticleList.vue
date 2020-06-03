@@ -26,7 +26,7 @@
 
               <div class="mb-4 subtitle-1">
                 <span class="topics">
-                  <span class="topic" :key="topic" v-for="topic in article._embedded['wp:term'][0]">
+                  <span class="topic" v-for="topic in article._embedded['wp:term'][0]">
                     <nuxt-link
                       class="fancy"
                       :to="`/topics/${topic.slug}`"
@@ -39,14 +39,7 @@
 
               <div id="content">
                 <span v-html="article.content.rendered"></span>
-
-                <v-chip class="mr-2" @click="lights">
-                  <v-icon left>mdi-brightness-5</v-icon>
-                  <template
-                    v-if="getGlobalTime(article.acf).globalHours > 0"
-                  >{{getGlobalTime(article.acf).globalHours}} H {{getGlobalTime(article.acf).globalMinutes}}</template>
-                  <template v-else>{{getGlobalTime(article.acf).globalMinutes}} min</template>
-                </v-chip>
+                <global-time-pill :article="article"></global-time-pill>
               </div>
             </div>
           </v-col>
@@ -58,23 +51,19 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
+import GlobalTimePill from '~/components/Article/GlobalTimePill.vue'
 
 export default defineComponent({
   name: 'ArticleList',
+  components: {
+    GlobalTimePill
+  },
   props: {
-    articles: Object
+    articles: Array
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
-    const getGlobalTime = (article: any) => {
-      const { preparing_time, cooking_time, resting_time } = article
-      const globalTime: number = preparing_time + cooking_time + resting_time
-      const globalHours = Math.trunc(globalTime)
-      const globalMinutes = globalTime * 60 - globalHours * 60
-
-      return { globalHours, globalMinutes }
-    }
-    return { getGlobalTime }
+    return {}
   }
 })
 </script>
