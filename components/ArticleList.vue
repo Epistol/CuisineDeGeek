@@ -3,11 +3,7 @@
     <article v-for="article in articles" :key="article.id">
       <v-container>
         <v-row no-gutters class="shadow">
-          <v-col
-            v-if="article._embedded['wp:featuredmedia']"
-            cols="3"
-            class="rounded-md"
-          >
+          <v-col v-if="article._embedded['wp:featuredmedia']" cols="3" class="rounded-md">
             <v-img
               class="rounded-l-md"
               v-if="article._embedded['wp:featuredmedia']"
@@ -30,10 +26,7 @@
 
               <div class="mb-4 subtitle-1">
                 <span class="topics">
-                  <span
-                    class="topic"
-                    v-for="topic in article._embedded['wp:term'][0]"
-                  >
+                  <span class="topic" v-for="topic in article._embedded['wp:term'][0]">
                     <nuxt-link
                       class="fancy"
                       :to="`/topics/${topic.slug}`"
@@ -51,14 +44,8 @@
                 <!-- Servings -->
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
-                    <v-chip
-                      class="mr-2"
-                      v-if="article.acf.servings > 0"
-                      v-on="on"
-                    >
-                      <v-icon size="medium" class="ml-1" left
-                        >fas fa-utensils</v-icon
-                      >
+                    <v-chip class="mr-2" v-if="article.acf.servings > 0" v-on="on">
+                      <v-icon size="medium" class="ml-1" left>fas fa-utensils</v-icon>
                       <template>{{ article.acf.servings }}</template>
                     </v-chip>
                   </template>
@@ -66,19 +53,40 @@
                 </v-tooltip>
                 <!-- Universe -->
                 <v-chip class="mr-2" v-if="article.acf.universe">
-                  <v-icon size="medium" class="ml-1" left
-                    >fas fa-disease</v-icon
-                  >
+                  <v-icon size="medium" class="ml-1" left>fas fa-disease</v-icon>
                   <template>{{ article.acf.universe }}</template>
                 </v-chip>
                 <!-- Difficulty -->
                 <v-chip class="mr-2" v-if="article.acf.difficulty">
                   <v-icon size="medium" class="ml-1" left>fas fa-star</v-icon>
-                  <template>{{
+                  <template>
+                    {{
                     difficulties[article.acf.difficulty]
-                  }}</template>
+                    }}
+                  </template>
                 </v-chip>
-                <social-sharing></social-sharing>
+                <social-sharing
+                  network-selected="facebook"
+                  :article-title="article.title.rendered"
+                  :article-excerpt="article.excerpt.rendered"
+                ></social-sharing>
+                <social-sharing
+                  network-selected="twitter"
+                  :article-title="article.title.rendered"
+                  :article-excerpt="article.excerpt.rendered"
+                ></social-sharing>
+                <social-sharing
+                  v-if="article._embedded['wp:featuredmedia']"
+                  network-selected="pinterest"
+                  :article-title="article.title.rendered"
+                  :article-excerpt="article.excerpt.rendered"
+                  :article-media="article._embedded['wp:featuredmedia'][0].source_url"
+                ></social-sharing>
+                <social-sharing
+                  network-selected="email"
+                  :article-title="article.title.rendered"
+                  :article-excerpt="(article.excerpt.rendered)"
+                ></social-sharing>
               </div>
             </div>
           </v-col>
