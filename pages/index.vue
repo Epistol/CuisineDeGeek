@@ -2,6 +2,7 @@
   <div class="home">
     <div class="articles">
       <!-- <TheHero :hero-article="articlesList[0]" /> -->
+      <SearchBar></SearchBar>
       <ArticleList :articles="articles" v-if="articles.length" />
       <!-- <client-only>
         <InfiniteLoading ref="infiniteLoading" @infinite="moreArticles">
@@ -27,20 +28,17 @@
 import { defineComponent, reactive, onMounted } from '@vue/composition-api'
 import usePosts from '~/composables/use-posts'
 import ArticleList from '~/components/ArticleList.vue'
+import SearchBar from '~/components/SearchBar.vue'
 
 export default defineComponent({
   name: 'Index',
   components: {
-    ArticleList
+    ArticleList,
+    SearchBar
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
-    const {
-      articles,
-      article,
-      fetchArticlesList,
-      fetchMoreArticlesList
-    } = usePosts({ ctx })
+    const { articles, article, fetchArticlesList, fetchMoreArticlesList } = usePosts({ ctx })
 
     onMounted(async () => {
       await fetchArticlesList()
@@ -50,4 +48,3 @@ export default defineComponent({
   }
 })
 </script>
-
