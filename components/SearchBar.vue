@@ -1,25 +1,15 @@
 <template>
   <div>
     <v-card-text>
-      <v-autocomplete
-        v-model="model"
-        :items="items"
-        :loading="isLoading"
-        :search-input="search"
-        @update:search-input="val => search = val"
-        hide-no-data
-        hide-selected
-        item-text="Description"
-        item-value="id"
-        label="Search"
-        placeholder="Start typing to Search"
-        prepend-icon="fas fa-search"
-        return-object
-      ></v-autocomplete>
+      <v-row no-gutters>
+        <v-col cols="9" sm="9" md="6">
+          <v-text-field label="Search" solo rounded append-icon="fas fa-search" v-model="search"></v-text-field>
+        </v-col>
+      </v-row>
       <!-- @select="loadArticle()" -->
     </v-card-text>
-    <!-- <v-divider></v-divider> -->
-    <!-- <v-expand-transition>
+    <v-divider v-if="model"></v-divider>
+    <v-expand-transition>
       <v-list v-if="model" class="red lighten-3">
         <v-list-item v-for="(field, i) in fields" :key="i">
           <v-list-item-content>
@@ -28,7 +18,7 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-expand-transition>-->
+    </v-expand-transition>
   </div>
 </template>
 
@@ -59,6 +49,17 @@ export default defineComponent({
       })
     })
 
+    const fields = computed(() => {
+      if (!model) return []
+
+      return Object.keys(model).map(key => {
+        return {
+          key,
+          value: model[key] || 'n/a'
+        }
+      })
+    })
+
     const watchSearch = (val: any) => {
       console.log('watchSearch -> val', val)
       // Items have already been loaded
@@ -79,7 +80,7 @@ export default defineComponent({
 
     watch(() => search, watchSearch)
 
-    return { descriptionLimit, entries, isLoading, model, search, watchSearch, items }
+    return { descriptionLimit, entries, isLoading, model, search, watchSearch, items, fields }
   }
 })
 </script>
