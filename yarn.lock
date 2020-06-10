@@ -9220,6 +9220,11 @@ tryer@^1.0.1:
   resolved "https://registry.yarnpkg.com/tryer/-/tryer-1.0.1.tgz#f2c85406800b9b0f74c9f7465b81eaad241252f8"
   integrity sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==
 
+ts-debounce@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/ts-debounce/-/ts-debounce-2.0.1.tgz#4d92a203c4183386802f8ef9eaebe0f2409e62da"
+  integrity sha512-+TztZrH7GnAD5CKxUohIAqIVHLrtivsYT7tZCLeRTCaBMSsfgYwprhA00kB/m0ezvYheOXJQqPfarAvgoayb7A==
+
 ts-jest@^23.10.5:
   version "23.10.5"
   resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-23.10.5.tgz#cdb550df4466a30489bf70ba867615799f388dd5"
