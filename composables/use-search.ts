@@ -13,7 +13,7 @@ export default function useSearch({ ctx }: Options) {
     fetching: false
   })
 
-  const globalState = reactive({ searchResults: {}, searchResult: {} })
+  const globalState = reactive({ searchResults: {}, selectedResult: {} })
 
   const fetchSearchResults = async (infiniteLoadingPage: number, searchContent: string, type: string = 'post') => {
     apiState.fetching = true
@@ -27,12 +27,23 @@ export default function useSearch({ ctx }: Options) {
       }
     })
     globalState.searchResults = data
-    console.log('useSearch -> data', data)
+    apiState.fetching = false
+  }
+
+  const setSelectedResult = (val: any) => {
+    globalState.selectedResult = val
+  }
+
+  const emptySearchResults = () => {
+    globalState.searchResults = {}
+    console.log('emptySearchResults -> searchResult', globalState.searchResults)
   }
 
   return {
     ...toRefs(apiState),
     ...toRefs(globalState),
-    fetchSearchResults
+    fetchSearchResults,
+    setSelectedResult,
+    emptySearchResults
   }
 }

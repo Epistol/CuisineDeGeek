@@ -2,7 +2,7 @@
   <div>
     <v-card-text>
       <v-row no-gutters>
-        <v-col cols="9" sm="9" md="6">
+        <v-col cols="12" sm="12" md="12">
           <v-text-field
             label="Search"
             solo
@@ -13,19 +13,17 @@
           ></v-text-field>
         </v-col>
       </v-row>
-      <!-- @select="loadArticle()" -->
+      <v-expand-transition>
+        <v-list v-if="items.length && search" class="red lighten-3">
+          <v-list-item v-for="(item, i) in items" :key="i" @click="setItemClick(i)">
+            <v-list-item-content>
+              <v-list-item-title v-text="item.title"></v-list-item-title>
+              <!-- <v-list-item-subtitle v-text="item.key"></v-list-item-subtitle> -->
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-expand-transition>
     </v-card-text>
-    <v-divider v-if="fields.length"></v-divider>
-    <v-expand-transition>
-      <v-list v-if="model" class="red lighten-3">
-        <v-list-item v-for="(field, i) in fields" :key="i">
-          <v-list-item-content>
-            <v-list-item-title v-text="field.value"></v-list-item-title>
-            <v-list-item-subtitle v-text="field.key"></v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-expand-transition>
   </div>
 </template>
 
@@ -42,9 +40,15 @@ export default defineComponent({
   setup(props, ctx) {
     const descriptionLimit = 60
     let entries: any = []
-    let model: any = ref<any>(null)
     const search = ref<any>(null)
-    const { fetchSearchResults, searchResults, fetching } = useSearch({ ctx })
+    const {
+      fetchSearchResults,
+      searchResults,
+      fetching,
+      emptySearchResults,
+      setSelectedResult,
+      selectedResult
+    } = useSearch({ ctx })
 
     const items = computed(() => {
       return searchResults.value
@@ -57,32 +61,30 @@ export default defineComponent({
       // })
     })
 
-    const fields = computed(() => {
-      if (!model) return []
-
-      return Object.keys(model).map(key => {
-        return {
-          key,
-          value: model[key] || 'n/a'
-        }
-      })
+    const selectedResultLocal = computed(() => {
+      return selectedResult.value
     })
 
-    const searchItems = (val: any) => {
-      // Items have already been loaded
-      console.log('searchItems -> searchItems', searchItems)
-      if (searchItems.length) return
-
+    const searchItems = () => {
       // Items have already been requested
+      console.info('val')
       if (fetching.value) return
 
       // Lazily load input items
-      fetchSearchResults(0, val)
-      console.log('searchItems -> entries', entries)
+      fetchSearchResults(0, search.value)
     }
+
     const debouncedInput = debounce(searchItems, 370)
 
-    return { descriptionLimit, entries, model, search, items, fields, debouncedInput }
+    const setItemClick = (val: any) => {
+      setSelectedResult(items.value[val])
+      search.value = selectedResultLocal.value.title
+      console.log('setItemClick -> selectedResultLocal', selectedResultLocal.value)
+      emptySearchResults()
+      // Now redirect to the item
+    }
+
+    return { descriptionLimit, searchResults, entries, search, items, debouncedInput, setItemClick }
   }
 })
 </script>
