@@ -5,7 +5,7 @@
       :expanded="expanded"
       :article="data"
       :featured-image="getFeaturedImage(data, 'large')"
-    />
+    />-->
     <transition name="slide-fade">
       <div
         class="narrow"
@@ -32,7 +32,7 @@
         <div class="meta">
           <h1 class="title" v-html="data.title.rendered"></h1>
           <div class="details">
-            <span>{{ longTimestamp(data.date) }}</span>
+            <!-- <span>{{ longTimestamp(data.date) }}</span> -->
             <span class="separator">|</span>
             <nuxt-link class="author fancy" :to="`/authors/${data._embedded.author[0].slug}`">
               <span>{{ data._embedded.author[0].name }}</span>
@@ -40,66 +40,51 @@
           </div>
         </div>
         <div class="content" v-html="data.content.rendered"></div>
-        <Comments :article="data" v-if="$store.state.enableComments && type === 'article'" />
+        <!-- <Comments :article="data" v-if="$store.state.enableComments && type === 'article'" /> -->
       </div>
     </transition>
-    <div v-if="colorAccentStyles" v-html="colorAccentStyles"></div>-->
+    <div v-if="colorAccentStyles" v-html="colorAccentStyles"></div>
   </article>
 </template>
 
-<script>
-// import FeaturedImage from '~/components/FeaturedImage.vue'
-// import Comments from '~/components/Comments'
 
-export default {
+<script lang="ts">
+import { defineComponent, reactive, onMounted, ref } from '@vue/composition-api'
+import usePosts from '~/composables/use-posts'
+
+export default defineComponent({
+  name: 'PageArticle',
+  components: {},
   props: {
     data: Object,
     type: String
   },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setup(props, ctx) {
+    const { fetchArticleForUserLang, article } = usePosts({ ctx })
+    const slug = ctx.root.$route.params?.article
 
-  mixins: {
-    getFeaturedImage: Function,
-    longTimestamp: Function
-  },
+    const expanded = ref<boolean>(false)
+    const colorAccentStyles = ref<any>(null)
 
-  // components: {
-  //   FeaturedImage,
-  //   Comments
-  // },
+    const getFeaturedImage = (article: any, size: any) => {
+      const featuredImage = article._embedded['wp:featuredmedia']
 
-  data() {
-    return {
-      expanded: false,
-      colorAccentStyles: null
-    }
-  },
-
-  methods: {
-    initGallery() {
-      let galleries = document.querySelectorAll('.content > .gallery')
-
-      if (galleries.length) {
-        for (let i = 0; i < galleries.length; i++) {
-          lightGallery(galleries[i], {
-            download: false,
-            selector: 'a'
-          })
-        }
+      if (featuredImage) {
+        return featuredImage[0].media_details.sizes[size]
       }
     }
-  },
 
-  mounted() {
-    this.initGallery()
+    onMounted(async () => {
+      await fetchArticleForUserLang(slug)
+    })
 
-    // if (this.getFeaturedImage(this.data, 'thumbnail')) {
-    //   this.getColorAccentStyles(this.data).then(
-    //     styles => (this.colorAccentStyles = styles)
-    //   )
-    // }
+    return { article, getFeaturedImage, expanded, colorAccentStyles, slug }
   }
-}
+})
 </script>
+
+
 
 <style lang="scss" scoped>
 article {
@@ -110,8 +95,7 @@ article {
   height: 100%;
 
   &.page-enter-active .narrow {
-    transition: transform 1s cubic-bezier(0.11, 0.89, 0.31, 0.99),
-      opacity 0.75s ease-out;
+    transition: transform 1s cubic-bezier(0.11, 0.89, 0.31, 0.99), opacity 0.75s ease-out;
   }
 
   &.page-enter .narrow,

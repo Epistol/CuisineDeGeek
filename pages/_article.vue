@@ -1,7 +1,6 @@
 <template>
   <div>
-    <p>Coucou</p>
-    <Article :data="article" v-if="article" type="article" />
+    <Article :data="article[0]" v-if="article[0]" type="article" />
   </div>
 </template>
 
