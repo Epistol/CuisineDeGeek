@@ -15,7 +15,12 @@ export default function useSearch({ ctx }: Options) {
 
   const globalState = reactive({ searchResults: {}, selectedResult: {} })
 
-  const fetchSearchResults = async (infiniteLoadingPage: number, searchContent: string, type: string = 'post') => {
+  const fetchSearchResults = async (
+    infiniteLoadingPage: number,
+    searchContent: string,
+    type: string = 'post',
+    subtype: string = ''
+  ) => {
     apiState.fetching = true
 
     const { data } = await ctx.root.$axios.get(`${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/search`, {
@@ -23,7 +28,8 @@ export default function useSearch({ ctx }: Options) {
         per_page: 10,
         search: searchContent,
         page: infiniteLoadingPage + 1,
-        type: type
+        type: type,
+        subtype: subtype
       }
     })
     globalState.searchResults = data

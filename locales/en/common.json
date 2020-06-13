@@ -1,3 +1,7 @@
 {
-  "common": {}
+  "common": {
+    "recipe": {
+      "last": "Last recipes"
+    }
+  }
 }

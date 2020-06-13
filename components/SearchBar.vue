@@ -9,7 +9,7 @@
             rounded
             append-icon="fas fa-search"
             v-model="search"
-            @input="debouncedInput()"
+            @input="debouncedInput('recipe')"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -65,13 +65,13 @@ export default defineComponent({
       return selectedResult.value
     })
 
-    const searchItems = () => {
+    const searchItems = (subtype: string) => {
       // Items have already been requested
       console.info('val')
       if (fetching.value) return
 
       // Lazily load input items
-      fetchSearchResults(0, search.value)
+      fetchSearchResults(0, search.value, 'post', subtype)
     }
 
     const debouncedInput = debounce(searchItems, 370)

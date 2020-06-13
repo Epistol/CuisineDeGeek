@@ -1,29 +1,39 @@
 <template>
-  <div>
-    <Article :data="article[0]" v-if="article[0]" type="article" />
+  <div class="w-full">
+    <template v-if="article[0]">
+      <template v-if="article[0].type !== 'recipe'">
+        <Article :data="article[0]" v-if="article[0]" type="article" />
+      </template>
+      <template v-else>
+        <Recipe :data="article[0]" v-if="article[0]" type="recipe" />
+      </template>
+    </template>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, reactive, onMounted } from '@vue/composition-api'
 import usePosts from '~/composables/use-posts'
-import Article from '~/components/ArticlePage.vue'
+import Article from '~/components/Article/ArticlePage.vue'
+import Recipe from '~/components/Recipe/Recipe.vue'
 
 export default defineComponent({
   name: 'PageArticle',
   components: {
-    Article
+    Article,
+    Recipe
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
     const { fetchArticleForUserLang, article } = usePosts({ ctx })
     const slug = ctx.root.$route.params?.article
     onMounted(async () => {
-      await fetchArticleForUserLang(slug)
+      // await fetchArticleForUserLang(slug, subcategory =  'recipe')
+      // await fetchArticleForUserLang(slug, null, 'recipe')
+      await fetchArticleForUserLang({ articleSlug: slug, subcategory: 'recipe' })
     })
 
     return { article }
   }
 })
 </script>
-

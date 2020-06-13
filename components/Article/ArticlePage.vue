@@ -6,43 +6,20 @@
       :article="data"
       :featured-image="getFeaturedImage(data, 'large')"
     />-->
-    <transition name="slide-fade">
-      <div
-        class="narrow"
-        :class="{ expanded: expanded, 'no-featured-image': !getFeaturedImage(data, 'large') }"
-      >
-        <button
-          class="expand-featured-image"
-          title="Show full image"
-          @click.prevent="expanded = !expanded"
-          :class="{ expanded: expanded }"
-          v-if="getFeaturedImage(data, 'large')"
-        >
-          <svg
-            fill="#000000"
-            height="24"
-            viewBox="0 0 24 24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z" />
-            <path d="M0 0h24v24H0z" fill="none" />
-          </svg>
-        </button>
-        <div class="meta">
-          <h1 class="title" v-html="data.title.rendered"></h1>
-          <div class="details">
-            <!-- <span>{{ longTimestamp(data.date) }}</span> -->
-            <span class="separator">|</span>
-            <nuxt-link class="author fancy" :to="`/authors/${data._embedded.author[0].slug}`">
-              <span>{{ data._embedded.author[0].name }}</span>
-            </nuxt-link>
-          </div>
+    <div class="narrow" :class="{ 'no-featured-image': !getFeaturedImage(data, 'large') }">
+      <div class="meta">
+        <h1 class="title" v-html="data.title.rendered"></h1>
+        <div class="details">
+          <!-- <span>{{ longTimestamp(data.date) }}</span> -->
+          <span class="separator">|</span>
+          <nuxt-link class="author fancy" :to="`/authors/${data._embedded.author[0].slug}`">
+            <span>{{ data._embedded.author[0].name }}</span>
+          </nuxt-link>
         </div>
-        <div class="content" v-html="data.content.rendered"></div>
-        <!-- <Comments :article="data" v-if="$store.state.enableComments && type === 'article'" /> -->
       </div>
-    </transition>
+      <div class="content" v-html="data.content.rendered"></div>
+      <!-- <Comments :article="data" v-if="$store.state.enableComments && type === 'article'" /> -->
+    </div>
     <div v-if="colorAccentStyles" v-html="colorAccentStyles"></div>
   </article>
 </template>
@@ -64,7 +41,6 @@ export default defineComponent({
     const { fetchArticleForUserLang, article } = usePosts({ ctx })
     const slug = ctx.root.$route.params?.article
 
-    const expanded = ref<boolean>(false)
     const colorAccentStyles = ref<any>(null)
 
     const getFeaturedImage = (article: any, size: any) => {
@@ -79,7 +55,7 @@ export default defineComponent({
       await fetchArticleForUserLang(slug)
     })
 
-    return { article, getFeaturedImage, expanded, colorAccentStyles, slug }
+    return { article, getFeaturedImage, colorAccentStyles, slug }
   }
 })
 </script>

@@ -3,6 +3,7 @@
     <div class="articles">
       <!-- <TheHero :hero-article="articlesList[0]" /> -->
       <SearchBar></SearchBar>
+      <h1 class="text-xl">{{ $t('common.recipe.last') }}</h1>
       <ArticleList :articles="articles" v-if="articles.length" />
       <!-- <client-only>
         <InfiniteLoading ref="infiniteLoading" @infinite="moreArticles">
@@ -27,7 +28,7 @@
 <script lang="ts">
 import { defineComponent, reactive, onMounted } from '@vue/composition-api'
 import usePosts from '~/composables/use-posts'
-import ArticleList from '~/components/ArticleList.vue'
+import ArticleList from '~/components/Article/ArticleList.vue'
 import SearchBar from '~/components/SearchBar.vue'
 
 export default defineComponent({
@@ -41,7 +42,7 @@ export default defineComponent({
     const { articles, article, fetchArticlesList, fetchMoreArticlesList } = usePosts({ ctx })
 
     onMounted(async () => {
-      await fetchArticlesList()
+      await fetchArticlesList('recipe')
     })
 
     return { articles }

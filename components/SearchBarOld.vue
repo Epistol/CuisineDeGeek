@@ -1,93 +1,63 @@
 <template>
   <div>
     <v-card-text>
-      <v-autocomplete
-        v-model="model"
-        :items="items"
-        :loading="isLoading"
-        :search-input.sync="search"
-        cache-items
-        color="white"
-        hide-no-data
-        hide-selected
-        item-text="Description"
-        item-value="id"
-        label="Search"
-        placeholder="Start typing to Search"
-        prepend-icon="fas fa-search"
-        return-object
-        @select="loadArticle()"
-      ></v-autocomplete>
+      <v-row no-gutters>
+        <v-col cols="12" sm="12" md="12">
+          <v-autocomplete
+            v-model="model"
+            :items="recipes"
+            item-text="title"
+            item-value="id"
+            label="Select a recipe..."
+            :search-input.sync="search"
+          />
+        </v-col>
+      </v-row>
     </v-card-text>
-    <!-- <v-divider></v-divider> -->
-    <!-- <v-expand-transition>
-      <v-list v-if="model" class="red lighten-3">
-        <v-list-item v-for="(field, i) in fields" :key="i">
-          <v-list-item-content>
-            <v-list-item-title v-text="field.value"></v-list-item-title>
-            <v-list-item-subtitle v-text="field.key"></v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-expand-transition>-->
   </div>
 </template>
 
-<script>
-export default {
-  data: () => ({
-    descriptionLimit: 60,
-    entries: [],
-    isLoading: false,
-    model: null,
-    search: null
-  }),
+<script lang="ts">
+import { defineComponent, computed, watch, ref, onMounted } from '@vue/composition-api'
+import useRecipes from '~/composables/use-recipes'
+import { debounce } from 'ts-debounce'
 
-  computed: {
-    fields() {
-      if (!this.model) return []
+export default defineComponent({
+  name: 'ArticleList',
+  components: {},
+  props: {},
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setup(props, ctx) {
+    const model = ref(null)
 
-      return Object.keys(this.model).map(key => {
-        return {
-          key,
-          value: this.model[key] || 'n/a'
-        }
-      })
-    },
-    items() {
-      return this.entries.map(entry => {
-        console.log('items -> entry', entry)
-        const Description =
-          entry.title.length > this.descriptionLimit ? entry.title.slice(0, this.descriptionLimit) + '...' : entry.title
+    const { fetchRecipesResults, recipes } = useRecipes({ ctx })
 
-        return Object.assign({}, entry, { Description })
-      })
+    const search = () => {
+      console.log('entered search function')
+      fetchRecipesResults(0, model.value)
     }
-  },
 
-  watch: {
-    search(val) {
-      // Items have already been loaded
-      if (this.items.length > 0) return
+    onMounted(async () => {
+      if (model.value !== null) {
+        await fetchRecipesResults(0, model.value)
+      } else {
+        await fetchRecipesResults(0, '')
+      }
+      console.log(recipes)
+    })
 
-      // Items have already been requested
-      if (this.isLoading) return
+    // const debouncedInput = debounce(searchResults, 370)
 
-      this.isLoading = true
+    // const setItemClick = (val: any) => {
+    //   setSelectedResult(items.value[val])
+    //   search.value = selectedResultLocal.value.title
+    //   console.log('setItemClick -> selectedResultLocal', selectedResultLocal.value)
+    //   emptySearchResults()
+    //   // Now redirect to the item
+    // }
 
-      // Lazily load input items
-      fetch(`${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/search`)
-        .then(res => res.json())
-        .then(res => {
-          this.entries = res
-        })
-        .catch(err => {
-          console.log(err)
-        })
-        .finally(() => (this.isLoading = false))
-    }
-  },
-
-  methods: {}
-}
+    return { fetchRecipesResults, recipes, model, search }
+  }
+})
 </script>
+
