@@ -15,7 +15,7 @@ export default defineComponent({
   name: 'Ingredients',
   components: {},
   props: {
-    data: Object
+    data: Array
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
