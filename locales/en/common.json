@@ -1,7 +1,8 @@
 {
   "common": {
     "recipe": {
-      "last": "Last recipes"
+      "last": "Last recipe | Last recipes",
+      "ingredient": "Ingredient | Ingredients"
     }
   }
 }
