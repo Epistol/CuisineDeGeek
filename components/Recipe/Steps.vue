@@ -1,8 +1,14 @@
 <template>
   <div>
-    <div v-for="(step, i) in steps" :key="i">
-      <p>{{ step.content }}</p>
-    </div>
+    <v-card class="mt-6" shaped style="border-radius: 1rem !important;">
+      <v-card-title>{{ $tc('common.recipe.step', steps.length) }}</v-card-title>
+      <v-card-text v-if="steps">
+        <div v-for="(step, i) in steps" :key="i">
+          <h2>{{ $tc('common.recipe.step', steps.length) }} {{ i + 1 }}</h2>
+          <p>{{ step.content }}</p>
+        </div>
+      </v-card-text>
+    </v-card>
   </div>
 </template>
 
@@ -14,7 +20,7 @@ export default defineComponent({
   name: 'Steps',
   components: {},
   props: {
-    steps: Object
+    steps: Array
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {

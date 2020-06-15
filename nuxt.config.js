@@ -31,6 +31,7 @@ export default {
   */
   plugins: [
     '~/plugins/composition',
+    '~/plugins/disqus',
   ],
   /*
   ** Nuxt.js dev-modules

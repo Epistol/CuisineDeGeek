@@ -16,10 +16,15 @@
       <template>{{ data.acf.universe }}</template>
     </v-chip>
     <!-- Difficulty -->
-    <v-chip class="mr-2" v-if="data.acf.difficulty">
-      <v-icon size="medium" class="ml-1" left>fas fa-tachometer-alt</v-icon>
-      <template>{{ difficulties[data.acf.difficulty] }}</template>
-    </v-chip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-chip class="mr-2" v-if="data.acf.difficulty" v-on="on">
+          <v-icon size="medium" class="ml-1" left>fas fa-tachometer-alt</v-icon>
+          <template>{{ difficulties[data.acf.difficulty] }}</template>
+        </v-chip>
+      </template>
+      <span>Difficulty</span>
+    </v-tooltip>
   </span>
 </template>
 

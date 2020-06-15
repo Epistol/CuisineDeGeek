@@ -7,6 +7,7 @@
             label="Search"
             solo
             rounded
+            hide-details
             append-icon="fas fa-search"
             v-model="search"
             flat
@@ -14,16 +15,22 @@
           ></v-text-field>
         </v-col>
       </v-row>
-      <v-expand-transition>
-        <v-list v-if="items.length && search" class="red lighten-3">
-          <v-list-item v-for="(item, i) in items" :key="i" @click="setItemClick(i)">
-            <v-list-item-content>
-              <v-list-item-title v-text="item.title"></v-list-item-title>
-              <!-- <v-list-item-subtitle v-text="item.key"></v-list-item-subtitle> -->
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-expand-transition>
+      <div class="absolute z-10 w-1/4 pt-2" v-if="items.length && search">
+        <v-expand-transition>
+          <v-list
+            v-if="items.length && search"
+            class="absolute text-black shadow white lighten-3"
+            v-cloak
+          >
+            <v-list-item v-for="(item, i) in items" :key="i" @click="setItemClick(i)">
+              <v-list-item-content>
+                <v-list-item-title v-text="item.title"></v-list-item-title>
+                <!-- <v-list-item-subtitle v-text="item.key"></v-list-item-subtitle> -->
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-expand-transition>
+      </div>
     </v-card-text>
   </div>
 </template>

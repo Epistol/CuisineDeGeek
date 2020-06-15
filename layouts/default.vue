@@ -3,18 +3,41 @@
     <header class="toolbar">
       <v-container>
         <v-row>
-          <v-col>
-            <nuxt-link :to="`/`" class="text-white">
-              <v-icon>far fa-file-alt</v-icon>Recettes
+          <v-col class="flex items-center justify-center" cols="3">
+            <nuxt-link :to="`/`">
+              <v-btn text>
+                <v-icon left color="white">far fa-file-alt</v-icon>
+                <span class="text-white">{{ $t('common.menu.recipe') }}</span>
+              </v-btn>
+            </nuxt-link>
+            <nuxt-link :to="`/`">
+              <v-btn text>
+                <v-icon left color="white">fas fa-hat-wizard</v-icon>
+                <span class="text-white">{{ $t('common.menu.universe') }}</span>
+              </v-btn>
             </nuxt-link>
           </v-col>
-          <v-col>
+          <v-col cols="6">
             <nuxt-link :to="`/`">
               <img data-src="/logo.svg" v-lazy-load :alt="title" />
             </nuxt-link>
             <SearchBar></SearchBar>
           </v-col>
-          <v-spacer />
+          <v-col cols="3" id="social" class="flex items-center justify-center">
+            <v-btn text href="https://cuisinedegeek.com/shop">
+              <v-icon left color="white">fas fa-shopping-cart</v-icon>
+              <span class="text-white">{{ $t('common.menu.shop') }}</span>
+            </v-btn>
+            <v-btn icon color="white" :href="`https://www.facebook.com/Cuisine2Geek`">
+              <v-icon>fab fa-facebook</v-icon>
+            </v-btn>
+            <v-btn icon color="white" :href="`https://www.instagram.com/cuisinedegeek`">
+              <v-icon>fab fa-instagram</v-icon>
+            </v-btn>
+            <v-btn icon color="white" :href="`https://twitter.com/CuisineDeGeek`">
+              <v-icon>fab fa-twitter</v-icon>
+            </v-btn>
+          </v-col>
         </v-row>
       </v-container>
     </header>

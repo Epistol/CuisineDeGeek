@@ -1,6 +1,6 @@
 <template>
   <article class="single">
-    <v-row class="mb-6">
+    <v-row class="mt-6 mb-6">
       <v-col cols="3">
         <!-- <FeaturedImage
           v-if="getFeaturedImage(data, 'large')"
@@ -24,8 +24,10 @@
       </v-col>
       <v-col cols="4" offset="1">
         <TitleCard :data="data"></TitleCard>
+        <steps v-if="data" :steps="data.acf.steps"></steps>
+        <comments></comments>
       </v-col>
-      <v-col cols="3" offset="1">
+      <v-col cols="2" offset="1">
         <!-- Widgets -->
       </v-col>
     </v-row>
@@ -39,6 +41,7 @@ import FeaturedImage from '~/components/Recipe/FeaturedImage.vue'
 import Steps from '~/components/Recipe/Steps.vue'
 import Ingredients from '~/components/Recipe/Ingredients.vue'
 import TitleCard from '~/components/Recipe/TitleCard.vue'
+import Comments from '~/components/Comments.vue'
 
 export default defineComponent({
   name: 'Recipe',
@@ -46,7 +49,8 @@ export default defineComponent({
     FeaturedImage,
     Steps,
     Ingredients,
-    TitleCard
+    TitleCard,
+    Comments
   },
   props: {
     data: Object,
