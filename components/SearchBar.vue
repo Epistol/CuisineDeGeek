@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card-text>
+    <v-card-text style="padding:0px!important">
       <v-row no-gutters>
         <v-col cols="12" sm="12" md="12">
           <v-text-field
@@ -9,6 +9,7 @@
             rounded
             append-icon="fas fa-search"
             v-model="search"
+            flat
             @input="debouncedInput('recipe')"
           ></v-text-field>
         </v-col>
@@ -33,7 +34,7 @@ import useSearch from '~/composables/use-search'
 import { debounce } from 'ts-debounce'
 
 export default defineComponent({
-  name: 'ArticleList',
+  name: 'SearchBar',
   components: {},
   props: {},
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

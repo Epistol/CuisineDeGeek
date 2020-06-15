@@ -2,8 +2,7 @@
   <div class="home">
     <div class="articles">
       <!-- <TheHero :hero-article="articlesList[0]" /> -->
-      <SearchBar></SearchBar>
-      <h1 class="text-xl">{{ $t('common.recipe.last') }}</h1>
+      <h1 class="text-xl">{{ $tc('common.recipe.last', articles.length) }}</h1>
       <ArticleList :articles="articles" v-if="articles.length" />
       <!-- <client-only>
         <InfiniteLoading ref="infiniteLoading" @infinite="moreArticles">
@@ -29,13 +28,11 @@
 import { defineComponent, reactive, onMounted } from '@vue/composition-api'
 import usePosts from '~/composables/use-posts'
 import ArticleList from '~/components/Article/ArticleList.vue'
-import SearchBar from '~/components/SearchBar.vue'
 
 export default defineComponent({
   name: 'Index',
   components: {
-    ArticleList,
-    SearchBar
+    ArticleList
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {

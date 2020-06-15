@@ -3,7 +3,9 @@
     <v-card class="mx-auto" max-width="344">
       <v-card-text>
         <p class="display-1 text--primary" v-html="data.title.rendered"></p>
-        <div class="text--primary"></div>
+        <div class="text--primary">
+          <Metas :data="data"></Metas>
+        </div>
       </v-card-text>
       <v-card-actions>
         <v-btn text color="deep-purple accent-4">Learn More</v-btn>
@@ -53,10 +55,13 @@
 
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api'
+import Metas from '~/components/Recipe/Metas.vue'
 
 export default defineComponent({
   name: 'TitleCard',
-  components: {},
+  components: {
+    Metas
+  },
   props: {
     data: Object
   },
