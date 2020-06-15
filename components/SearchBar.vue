@@ -12,16 +12,13 @@
             v-model="search"
             flat
             @input="debouncedInput('recipe')"
+            @keydown.enter="search.value ? redirectToRecipe(search.value) : ''"
           ></v-text-field>
         </v-col>
       </v-row>
       <div class="absolute z-10 w-1/4 pt-2" v-if="items.length && search">
         <v-expand-transition>
-          <v-list
-            v-if="items.length && search"
-            class="absolute text-black shadow white lighten-3"
-            v-cloak
-          >
+          <v-list v-if="items.length && search" class="absolute text-black shadow white lighten-3" v-cloak>
             <v-list-item v-for="(item, i) in items" :key="i" @click="setItemClick(i)">
               <v-list-item-content>
                 <v-list-item-title v-text="item.title"></v-list-item-title>
@@ -90,9 +87,15 @@ export default defineComponent({
       console.log('setItemClick -> selectedResultLocal', selectedResultLocal.value)
       emptySearchResults()
       // Now redirect to the item
+      redirectToRecipe(selectedResultLocal.value.title)
     }
 
-    return { descriptionLimit, searchResults, entries, search, items, debouncedInput, setItemClick }
+    const redirectToRecipe = (val: any) => {
+      console.log('redirectToRecipe', val)
+      ctx.root.$router.push(val)
+    }
+
+    return { descriptionLimit, searchResults, entries, search, items, debouncedInput, setItemClick, redirectToRecipe }
   }
 })
 </script>
