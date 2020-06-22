@@ -12,7 +12,8 @@
             v-model="search"
             flat
             @input="debouncedInput('recipe')"
-            @change="redirectToSearchResults"
+            @keydown.enter="redirectToSearchResults(search)"
+            @click:append="redirectToSearchResults(search)"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -60,7 +61,6 @@ export default defineComponent({
     } = useSearch({ ctx })
 
     const items = computed(() => searchResults.value)
-
     const selectedResultLocal = computed(() => selectedResult.value)
 
     const searchItems = (subtype: string) => {
@@ -73,20 +73,21 @@ export default defineComponent({
 
     const debouncedInput = debounce(searchItems, 370)
 
-    const setItemClick = (val: any) => {
-      setSelectedResult(items.value[val])
-      search.value = selectedResultLocal.value
-      console.log('setItemClick -> selectedResultLocal', selectedResultLocal.value)
-      emptySearchResults()
-      // Now redirect to the item
-      // redirectToRecipe(selectedResultLocal.value.title)
+    const setItemClick = async (val: any) => {
+      await setSelectedResult(items.value[val])
+      if (selectedResultLocal.value.slug) {
+        emptySearchResults()
+        // Now redirect to the item
+        await redirectToRecipe(selectedResultLocal.value.slug)
+      }
     }
 
-    const redirectToRecipe = (val: any) => {
+    const redirectToRecipe = async (val: any) => {
       ctx.root.$router.push(val)
     }
 
     const redirectToSearchResults = (val: any) => {
+      console.log('redirectToSearchResults -> val', val)
       ctx.root.$router.push(val)
     }
 
