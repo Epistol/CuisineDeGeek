@@ -12,13 +12,17 @@
             v-model="search"
             flat
             @input="debouncedInput('recipe')"
-            @keydown.enter="search.value ? redirectToRecipe(search.value) : ''"
+            @change="redirectToSearchResults"
           ></v-text-field>
         </v-col>
       </v-row>
       <div class="absolute z-10 w-1/4 pt-2" v-if="items.length && search">
         <v-expand-transition>
-          <v-list v-if="items.length && search" class="absolute text-black shadow white lighten-3" v-cloak>
+          <v-list
+            v-if="items.length && search"
+            class="absolute text-black shadow white lighten-3"
+            v-cloak
+          >
             <v-list-item v-for="(item, i) in items" :key="i" @click="setItemClick(i)">
               <v-list-item-content>
                 <v-list-item-title v-text="item.title"></v-list-item-title>
@@ -55,24 +59,12 @@ export default defineComponent({
       selectedResult
     } = useSearch({ ctx })
 
-    const items = computed(() => {
-      return searchResults.value
-      // return searchResults.value.map((entry: any) => {
-      //   console.log('items -> entry', entry)
-      //   const Description =
-      //     entry.title.length > descriptionLimit ? entry.title.slice(0, descriptionLimit) + '...' : entry.title
+    const items = computed(() => searchResults.value)
 
-      //   return Object.assign({}, entry, { Description })
-      // })
-    })
-
-    const selectedResultLocal = computed(() => {
-      return selectedResult.value
-    })
+    const selectedResultLocal = computed(() => selectedResult.value)
 
     const searchItems = (subtype: string) => {
       // Items have already been requested
-      console.info('val')
       if (fetching.value) return
 
       // Lazily load input items
@@ -83,19 +75,32 @@ export default defineComponent({
 
     const setItemClick = (val: any) => {
       setSelectedResult(items.value[val])
-      search.value = selectedResultLocal.value.title
+      search.value = selectedResultLocal.value
       console.log('setItemClick -> selectedResultLocal', selectedResultLocal.value)
       emptySearchResults()
       // Now redirect to the item
-      redirectToRecipe(selectedResultLocal.value.title)
+      // redirectToRecipe(selectedResultLocal.value.title)
     }
 
     const redirectToRecipe = (val: any) => {
-      console.log('redirectToRecipe', val)
       ctx.root.$router.push(val)
     }
 
-    return { descriptionLimit, searchResults, entries, search, items, debouncedInput, setItemClick, redirectToRecipe }
+    const redirectToSearchResults = (val: any) => {
+      ctx.root.$router.push(val)
+    }
+
+    return {
+      descriptionLimit,
+      searchResults,
+      entries,
+      search,
+      items,
+      debouncedInput,
+      setItemClick,
+      redirectToRecipe,
+      redirectToSearchResults
+    }
   }
 })
 </script>

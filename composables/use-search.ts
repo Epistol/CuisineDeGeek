@@ -37,6 +37,8 @@ export default function useSearch({ ctx }: Options) {
   }
 
   const setSelectedResult = (val: any) => {
+    // We need to load the data from the value passed, call api, then return the api data
+    console.log('setSelectedResult -> val', val)
     globalState.selectedResult = val
   }
 
