@@ -88,7 +88,9 @@ export default defineComponent({
 
     const redirectToSearchResults = (val: any) => {
       console.log('redirectToSearchResults -> val', val)
-      ctx.root.$router.push(val)
+      // ctx.root.$router.push(val)
+      // ctx.root.$router.push({ name: 'SearchResults', params: { query: val } })
+      ctx.root.$router.push({ path: 'search', query: { query: val } })
     }
 
     return {

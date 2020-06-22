@@ -9,6 +9,9 @@
       "recipe": "Recipe",
       "universe": "Universe",
       "shop": "Shop"
+    },
+    "search": {
+      "title": "Results for "
     }
   }
 }
