@@ -1,6 +1,5 @@
 <template>
   <div v-if="propArticle">
-    {{propArticle._links}}
     <v-container>
       <v-row no-gutters class="shadow">
         <v-col v-if="propArticle._links" cols="3" class="rounded-md">
