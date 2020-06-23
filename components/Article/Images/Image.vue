@@ -5,7 +5,7 @@
       v-if="propImageLink"
       :height="propHeight"
       :alt="propImageLink.alt_text"
-      :src="propImageLink.guid.rendered"
+      :src="propImageLink"
     ></v-img>
   </div>
 </template>
