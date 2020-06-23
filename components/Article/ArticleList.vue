@@ -1,78 +1,7 @@
 <template>
   <div class="article-list">
     <article v-for="article in articles" :key="article.id">
-      <v-container>
-        <v-row no-gutters class="shadow">
-          <v-col v-if="article._embedded['wp:featuredmedia']" cols="3" class="rounded-md">
-            <v-img
-              class="rounded-l-md"
-              v-if="article._embedded['wp:featuredmedia']"
-              height="250"
-              :alt="article._embedded['wp:featuredmedia'][0].alt_text"
-              :src="article._embedded['wp:featuredmedia'][0].media_details.sizes.medium_large.source_url"
-            ></v-img>
-          </v-col>
-          <v-col
-            :cols="article._embedded['wp:featuredmedia'] ? 9 : 12"
-            class="bg-white rounded-r-md"
-          >
-            <div class="p-4">
-              <nuxt-link :to="`/${article.slug}`">
-                <span class="text-xl" v-html="article.title.rendered"></span>
-              </nuxt-link>
-
-              <div class="mb-4 subtitle-1">
-                <span class="topics">
-                  <span class="topic" v-for="topic in article._embedded['wp:term'][0]">
-                    <nuxt-link
-                      class="fancy"
-                      :to="`/topics/${topic.slug}`"
-                      :key="topic.id"
-                      v-html="topic.name"
-                    ></nuxt-link>
-                  </span>
-                </span>
-              </div>
-
-              <div id="content">
-                <!-- Excerpt -->
-                <span v-html="article.content.rendered"></span>
-                <div class="flex">
-                  <div class="flex-auto" id="infos">
-                    <!-- Time -->
-                    <global-time-pill :article="article"></global-time-pill>
-                    <Metas :data="article"></Metas>
-                  </div>
-                  <div id="social" class="flex-auto">
-                    <social-sharing
-                      network-selected="facebook"
-                      :article-title="article.title.rendered"
-                      :article-excerpt="article.excerpt.rendered"
-                    ></social-sharing>
-                    <social-sharing
-                      network-selected="twitter"
-                      :article-title="article.title.rendered"
-                      :article-excerpt="article.excerpt.rendered"
-                    ></social-sharing>
-                    <social-sharing
-                      v-if="article._embedded['wp:featuredmedia']"
-                      network-selected="pinterest"
-                      :article-title="article.title.rendered"
-                      :article-excerpt="article.excerpt.rendered"
-                      :article-media="article._embedded['wp:featuredmedia'][0].source_url"
-                    ></social-sharing>
-                    <social-sharing
-                      network-selected="email"
-                      :article-title="article.title.rendered"
-                      :article-excerpt="article.excerpt.rendered"
-                    ></social-sharing>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </v-col>
-        </v-row>
-      </v-container>
+      <ArticleExcerpt :article="article" />
     </article>
   </div>
 </template>
@@ -82,13 +11,15 @@ import { defineComponent } from '@vue/composition-api'
 import GlobalTimePill from '~/components/Recipe/GlobalTimePill.vue'
 import Metas from '~/components/Recipe/Metas.vue'
 import SocialSharing from '~/components/Article/SocialSharing.vue'
+import ArticleExcerpt from '~/components/Article/ArticleExcerpt.vue'
 
 export default defineComponent({
   name: 'ArticleList',
   components: {
     GlobalTimePill,
     SocialSharing,
-    Metas
+    Metas,
+    ArticleExcerpt
   },
   props: {
     articles: Array

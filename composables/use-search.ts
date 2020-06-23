@@ -17,7 +17,7 @@ export default function useSearch({ ctx }: Options) {
 
   const fetchSearchResults = async (
     infiniteLoadingPage: number,
-    searchContent: string,
+    searchContent: any,
     type: string = 'post',
     subtype: string = ''
   ) => {
@@ -39,13 +39,11 @@ export default function useSearch({ ctx }: Options) {
   const setSelectedResult = async (val: any) => {
     // We need to load the data from the value passed, call api, then return the api data
     const { data } = await ctx.root.$axios.get(val._links.self[0].href)
-    console.log('setSelectedResult -> data', data)
     globalState.selectedResult = data
   }
 
   const emptySearchResults = () => {
     globalState.searchResults = {}
-    console.log('emptySearchResults -> searchResult', globalState.searchResults)
   }
 
   return {

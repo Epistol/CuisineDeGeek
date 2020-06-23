@@ -14,10 +14,12 @@
             @input="debouncedInput('recipe')"
             @keydown.enter="redirectToSearchResults(search)"
             @click:append="redirectToSearchResults(search)"
+            @focus="focused = true"
+            @blur="focused = false"
           ></v-text-field>
         </v-col>
       </v-row>
-      <div class="absolute z-10 w-1/4 pt-2" v-if="items.length && search">
+      <div class="absolute z-10 w-1/4 pt-2" v-if="items.length && search && focused">
         <v-expand-transition>
           <v-list
             v-if="items.length && search"
@@ -51,6 +53,8 @@ export default defineComponent({
     const descriptionLimit = 60
     let entries: any = []
     const search = ref<any>(null)
+    const focused = ref<any>(false)
+
     const {
       fetchSearchResults,
       searchResults,
@@ -66,7 +70,6 @@ export default defineComponent({
     const searchItems = (subtype: string) => {
       // Items have already been requested
       if (fetching.value) return
-
       // Lazily load input items
       fetchSearchResults(0, search.value, 'post', subtype)
     }
@@ -87,9 +90,6 @@ export default defineComponent({
     }
 
     const redirectToSearchResults = (val: any) => {
-      console.log('redirectToSearchResults -> val', val)
-      // ctx.root.$router.push(val)
-      // ctx.root.$router.push({ name: 'SearchResults', params: { query: val } })
       ctx.root.$router.push({ path: 'search', query: { query: val } })
     }
 
@@ -102,7 +102,8 @@ export default defineComponent({
       debouncedInput,
       setItemClick,
       redirectToRecipe,
-      redirectToSearchResults
+      redirectToSearchResults,
+      focused
     }
   }
 })

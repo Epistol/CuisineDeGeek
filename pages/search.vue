@@ -5,41 +5,63 @@
         {{ $t('common.search.title') }}
         <span class="italic">{{query}}</span>
       </h1>
-      <!-- <client-only>
-        <InfiniteLoading ref="infiniteLoading" @infinite="moreArticles">
-          <span slot="spinner">
-            <Spinner1 />
-          </span>
-          <span slot="no-results">
-            <Smile />
-            <div>No more articles!</div>
-          </span>
-          <span slot="no-more">
-            <Smile />
-            <div>No more articles!</div>
-          </span>
-        </InfiniteLoading>
-      </client-only>-->
+      <div class="absolute z-10 w-1/4 pt-2" v-if="items.length && query">
+        <template v-for="(item,i) in items">
+          <Result :item="item" :key="i" />
+        </template>
+        <!-- <ArticleList :articles="items" v-if="items.length" /> -->
+      </div>
     </div>
     <!-- <TheSidebar /> -->
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, onMounted } from '@vue/composition-api'
+import { defineComponent, ref, computed, onMounted } from '@vue/composition-api'
 import usePosts from '~/composables/use-posts'
+import useSearch from '~/composables/use-search'
 import ArticleList from '~/components/Article/ArticleList.vue'
+import Result from '~/components/Article/Result.vue'
 
 export default defineComponent({
   name: 'SearchResults',
   components: {
-    ArticleList
+    ArticleList,
+    Result
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
-    const query = computed(() => ctx.root.$route.query.query)
+    const query = computed(() => (ctx.root.$route.query.query ? ctx.root.$route.query.query : ''))
 
-    return { query }
+    let entries: any = []
+    let test = ref<any>(null)
+    const search = ref<any>(null)
+    const {
+      fetchSearchResults,
+      searchResults,
+      fetching,
+      emptySearchResults,
+      setSelectedResult,
+      selectedResult
+    } = useSearch({ ctx })
+
+    const items = computed(() => searchResults.value)
+
+    const getSearchResults = async (subtype: string) => {
+      // Items have already been requested
+      if (fetching.value) return
+      if (query.value !== null) {
+        // Lazily load input items
+        fetchSearchResults(0, query.value, 'post', subtype)
+        console.info('searchResults', searchResults)
+      }
+    }
+
+    onMounted(async () => {
+      await getSearchResults('recipe')
+    })
+
+    return { query, getSearchResults, items, test }
   }
 })
 </script>
