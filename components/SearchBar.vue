@@ -26,7 +26,12 @@
             class="absolute text-black shadow white lighten-3"
             v-cloak
           >
-            <v-list-item v-for="(item, i) in items" :key="i" @click="setItemClick(i)">
+            <v-list-item
+              v-for="(item, i) in items"
+              :key="i"
+              @click="setItemClick(i)"
+              v-on:mousedown="$event.preventDefault()"
+            >
               <v-list-item-content>
                 <v-list-item-title v-text="item.title"></v-list-item-title>
                 <!-- <v-list-item-subtitle v-text="item.key"></v-list-item-subtitle> -->
@@ -40,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, watch, ref } from '@vue/composition-api'
+import { defineComponent, computed, ref } from '@vue/composition-api'
 import useSearch from '~/composables/use-search'
 import { debounce } from 'ts-debounce'
 

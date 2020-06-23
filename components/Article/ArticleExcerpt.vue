@@ -5,6 +5,66 @@
         <v-col v-if="propArticle._links" cols="3" class="rounded-md">
           <ArticleImage :imageLink="propArticle._links['wp:featuredmedia'][0].href" />
         </v-col>
+        <v-col
+          v-if="propArticle._links"
+          :cols="propArticle._links['wp:featuredmedia'][0].href ? 9 : 12"
+          class="bg-white rounded-r-md"
+        >
+          <div class="p-4">
+            <nuxt-link :to="`/${propArticle.slug}`">
+              <span class="text-xl" v-html="propArticle.title.rendered"></span>
+            </nuxt-link>
+
+            <div class="mb-4 subtitle-1">
+              <span class="topics">
+                <!-- <span class="topic" v-for="topic in article._embedded['wp:term'][0]">
+                    <nuxt-link
+                      class="fancy"
+                      :to="`/topics/${topic.slug}`"
+                      :key="topic.id"
+                      v-html="topic.name"
+                    ></nuxt-link>
+                </span>-->
+              </span>
+            </div>
+
+            <div id="content">
+              <!-- Excerpt -->
+              <span v-html="propArticle.content.rendered"></span>
+              <div class="flex">
+                <div class="flex-auto" id="infos">
+                  <!-- Time -->
+                  <global-time-pill :article="propArticle"></global-time-pill>
+                  <Metas :data="propArticle"></Metas>
+                </div>
+                <div id="social" class="flex-auto">
+                  <social-sharing
+                    network-selected="facebook"
+                    :article-title="propArticle.title.rendered"
+                    :article-excerpt="propArticle.excerpt.rendered"
+                  ></social-sharing>
+                  <social-sharing
+                    network-selected="twitter"
+                    :article-title="propArticle.title.rendered"
+                    :article-excerpt="propArticle.excerpt.rendered"
+                  ></social-sharing>
+                  <!-- <social-sharing
+                      v-if="article._embedded['wp:featuredmedia']"
+                      network-selected="pinterest"
+                      :article-title="propArticle.title.rendered"
+                      :article-excerpt="propArticle.excerpt.rendered"
+                      :article-media="propArticle._links['wp:featuredmedia'][0].href"
+                  ></social-sharing>-->
+                  <social-sharing
+                    network-selected="email"
+                    :article-title="propArticle.title.rendered"
+                    :article-excerpt="propArticle.excerpt.rendered"
+                  ></social-sharing>
+                </div>
+              </div>
+            </div>
+          </div>
+        </v-col>
       </v-row>
     </v-container>
   </div>
@@ -13,9 +73,13 @@
 <script lang="ts">
 import { defineComponent, ref, toRefs, reactive, computed, onMounted } from '@vue/composition-api'
 import ArticleImage from '~/components/Article/Images/Image.vue'
+import GlobalTimePill from '~/components/Recipe/GlobalTimePill.vue'
+import Metas from '~/components/Recipe/Metas.vue'
+import SocialSharing from '~/components/Article/SocialSharing.vue'
+
 export default defineComponent({
   name: 'ArticleExcerpt',
-  components: { ArticleImage },
+  components: { ArticleImage, GlobalTimePill, Metas, SocialSharing },
   props: {
     article: Object
   },

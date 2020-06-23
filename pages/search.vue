@@ -5,11 +5,26 @@
         {{ $t('common.search.title') }}
         <span class="italic">{{query}}</span>
       </h1>
-      <div class="absolute z-10 w-1/4 pt-2" v-if="items.length && query">
+      <div class="pt-2" v-if="items.length">
         <template v-for="(item,i) in items">
           <Result :item="item" :key="i" />
         </template>
-        <!-- <ArticleList :articles="items" v-if="items.length" /> -->
+      </div>
+      <div v-else class="mx-auto">
+        <a href="/">
+          <div class="w-1/4 mx-auto">
+            <img data-src="/cat-lost.png" v-lazy-load />
+          </div>
+        </a>
+        <div class="w-3/4 mx-auto mt-10 text-center">
+          <span class="mt-6 text-xl font-bold">No results found</span>
+          <p>
+            It seems we can’t find any results based on your search,
+            <a
+              href="/"
+            >but you can check out the homepage</a>
+          </p>
+        </div>
       </div>
     </div>
     <!-- <TheSidebar /> -->
@@ -17,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, onMounted } from '@vue/composition-api'
+import { defineComponent, ref, watch, computed, onMounted } from '@vue/composition-api'
 import usePosts from '~/composables/use-posts'
 import useSearch from '~/composables/use-search'
 import ArticleList from '~/components/Article/ArticleList.vue'
@@ -34,7 +49,6 @@ export default defineComponent({
     const query = computed(() => (ctx.root.$route.query.query ? ctx.root.$route.query.query : ''))
 
     let entries: any = []
-    let test = ref<any>(null)
     const search = ref<any>(null)
     const {
       fetchSearchResults,
@@ -57,11 +71,17 @@ export default defineComponent({
       }
     }
 
+    watch(query, (value, prevValue) => {
+      if (value !== prevValue) {
+        getSearchResults('recipe')
+      }
+    })
+
     onMounted(async () => {
       await getSearchResults('recipe')
     })
 
-    return { query, getSearchResults, items, test }
+    return { query, getSearchResults, items }
   }
 })
 </script>

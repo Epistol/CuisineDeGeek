@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, ref, computed } from '@vue/composition-api'
+import { defineComponent, computed } from '@vue/composition-api'
 import { Disqus } from 'vue-disqus'
 
 export default defineComponent({

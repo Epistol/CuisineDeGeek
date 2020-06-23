@@ -33,6 +33,7 @@ export default defineComponent({
 
     onMounted(async () => {
       await loadFullDataset(propItem.value)
+      // propItem.value need to be watched
     })
 
     return { propItem, ...toRefs(globalState) }
