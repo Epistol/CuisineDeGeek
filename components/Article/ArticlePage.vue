@@ -38,7 +38,7 @@ export default defineComponent({
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
-    const { fetchArticleForUserLang } = usePosts({ ctx })
+    const { fetchArticleForUserLang, article } = usePosts({ ctx })
     const slug = ctx.root.$route.params?.article
 
     const colorAccentStyles = ref<any>(null)
