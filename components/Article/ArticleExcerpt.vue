@@ -86,7 +86,6 @@ export default defineComponent({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
     const propArticle = computed(() => props.article)
-    console.log('setup -> propArticle', propArticle)
 
     return { propArticle }
   }

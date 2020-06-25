@@ -67,7 +67,6 @@ export default defineComponent({
       if (query.value !== null) {
         // Lazily load input items
         fetchSearchResults(0, query.value, 'post', subtype)
-        console.info('searchResults', searchResults)
       }
     }
 
