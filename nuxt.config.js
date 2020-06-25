@@ -57,8 +57,8 @@ export default {
       'nuxt-i18n',
       {
         locales: [
-          { code: 'en', iso: 'en_US', file: 'en-US.js' },
-          { code: 'fr', iso: 'fr-FR', file: 'fr-FR.js' }
+          { code: 'en', iso: 'en_US', file: 'en-US.js', name: 'English' },
+          { code: 'fr', iso: 'fr-FR', file: 'fr-FR.js', name: 'Français' }
         ],
         defaultLocale: 'en',
         strategy: 'prefix_and_default',

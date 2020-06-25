@@ -1,13 +1,13 @@
 <template>
   <v-bottom-navigation v-model="bottomNav" :absolute="true" :fixed="true">
-    <v-btn value="recipes">
+    <v-btn value="recipes" href="/">
       <span>Recipes</span>
       <v-icon>fa-utensils</v-icon>
     </v-btn>
 
-    <v-btn value="search">
-      <span>Search</span>
-      <v-icon>fa-search</v-icon>
+    <v-btn value="search" href="https://cuisinedegeek.com/shop">
+      <span>Shop</span>
+      <v-icon>fas fa-shopping-cart</v-icon>
     </v-btn>
 
     <v-btn value="universes">

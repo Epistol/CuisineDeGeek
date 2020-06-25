@@ -3,10 +3,16 @@
     <header class="toolbar">
       <v-container>
         <v-row align="center" justify="center">
-          <v-col align="center" justify="center" class="items-center justify-center" cols="3">
+          <v-col
+            align="center"
+            justify="center"
+            class="items-center justify-center hidden-sm-and-down"
+            cols="3"
+            sm="0"
+          >
             <nuxt-link :to="`/`">
               <v-btn text>
-                <v-icon left color="white">far fa-file-alt</v-icon>
+                <v-icon left color="white">fa-utensils</v-icon>
                 <span class="text-white">{{ $t('common.menu.recipe') }}</span>
               </v-btn>
             </nuxt-link>
@@ -17,7 +23,7 @@
               </v-btn>
             </nuxt-link>
           </v-col>
-          <v-col cols="6" align="center" justify="center">
+          <v-col :lg="6" :md="6" :sm="12" align="center" justify="center">
             <nuxt-link :to="`/`">
               <img data-src="/logo.svg" v-lazy-load :alt="title" />
             </nuxt-link>
@@ -28,7 +34,8 @@
             align="center"
             justify="center"
             id="social"
-            class="items-center justify-center"
+            class="items-center justify-center hidden-sm-and-down"
+            sm="0"
           >
             <v-btn text href="https://cuisinedegeek.com/shop">
               <v-icon left color="white">fas fa-shopping-cart</v-icon>
@@ -52,8 +59,11 @@
         <nuxt />
       </v-container>
     </v-main>
-    <v-footer :fixed="true" app>
+    <v-footer :fixed="true" app class="hidden-md-and-up">
       <footerMenu></footerMenu>
+    </v-footer>
+    <v-footer class="hidden-sm-and-down">
+      <LangSwitcher></LangSwitcher>
     </v-footer>
   </v-app>
 </template>
@@ -61,13 +71,15 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from '@vue/composition-api'
 import footerMenu from '~/components/Menu/FooterMenu.vue'
+import LangSwitcher from '~/components/Menu/LangSwitcher.vue'
 import SearchBar from '~/components/SearchBar.vue'
 
 export default defineComponent({
   name: 'DefaultLayout',
   components: {
     footerMenu,
-    SearchBar
+    SearchBar,
+    LangSwitcher
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
