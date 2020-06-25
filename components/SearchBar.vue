@@ -69,8 +69,8 @@ export default defineComponent({
       selectedResult
     } = useSearch({ ctx })
 
-    const items = computed(() => searchResults.value)
-    const selectedResultLocal = computed(() => selectedResult.value)
+    const items: any = computed(() => searchResults.value)
+    const selectedResultLocal: any = computed(() => selectedResult.value)
 
     const searchItems = (subtype: string) => {
       // Items have already been requested
@@ -81,8 +81,8 @@ export default defineComponent({
 
     const debouncedInput = debounce(searchItems, 370)
 
-    const setItemClick = async (val: any) => {
-      await setSelectedResult(items.value[val])
+    const setItemClick = async (number: number) => {
+      await setSelectedResult(items.value[number])
       if (selectedResultLocal.value.slug) {
         emptySearchResults()
         // Now redirect to the item

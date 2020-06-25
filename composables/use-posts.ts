@@ -10,16 +10,25 @@ interface ArticleConfig {
   id?: number
   subcategory: string
 }
+interface ApiState {
+  response: object
+  error: object | null
+  fetching: boolean
+}
+interface globalState {
+  articles: object | null
+  article: object | null
+}
 
 export default function usePosts({ ctx }: Options) {
   // Setting up the endpoint
-  const apiState = reactive({
+  const apiState: ApiState = reactive({
     response: [],
     error: null,
     fetching: false
   })
 
-  const globalState = reactive({
+  const globalState: globalState = reactive({
     articles: {},
     article: {}
   })

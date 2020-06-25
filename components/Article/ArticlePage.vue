@@ -38,7 +38,7 @@ export default defineComponent({
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
-    const { fetchArticleForUserLang, article } = usePosts({ ctx })
+    const { fetchArticleForUserLang } = usePosts({ ctx })
     const slug = ctx.root.$route.params?.article
 
     const colorAccentStyles = ref<any>(null)
@@ -52,7 +52,7 @@ export default defineComponent({
     }
 
     onMounted(async () => {
-      await fetchArticleForUserLang(slug)
+      await fetchArticleForUserLang({ articleSlug: slug, subcategory: 'recipe' })
     })
 
     return { article, getFeaturedImage, colorAccentStyles, slug }
