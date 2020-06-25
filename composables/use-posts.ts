@@ -10,18 +10,27 @@ interface ArticleConfig {
   id?: number
   subcategory: string
 }
+interface ApiState {
+  response: object
+  error: object | null
+  fetching: boolean
+}
+interface globalState {
+  articles: object | null
+  article: object[] | null
+}
 
 export default function usePosts({ ctx }: Options) {
   // Setting up the endpoint
-  const apiState = reactive({
+  const apiState: ApiState = reactive({
     response: [],
     error: null,
     fetching: false
   })
 
-  const globalState = reactive({
+  const globalState: globalState = reactive({
     articles: {},
-    article: {}
+    article: [{}]
   })
 
   const fetchArticlesList = async (subtype: string = 'posts') => {
@@ -55,9 +64,13 @@ export default function usePosts({ ctx }: Options) {
 
   const fetchArticleForUserLang = async (config: ArticleConfig) => {
     await fetchArticleData(config)
-    if (globalState.article[0].lang !== ctx.root.$i18n.locale) {
-      const articleIdLangMatch = globalState.article[0].translations[ctx.root.$i18n.locale]
-      // await fetchArticleData({undefined, articleIdLangMatch, config.subcategory})
+    if (globalState.article) {
+      // @ts-ignore
+      if (globalState.article[0].lang !== ctx.root.$i18n.locale) {
+        // @ts-ignore
+        const articleIdLangMatch = globalState.article[0].translations[ctx.root.$i18n.locale]
+        // await fetchArticleData({undefined, articleIdLangMatch, config.subcategory})
+      }
     }
   }
 
@@ -76,7 +89,9 @@ export default function usePosts({ ctx }: Options) {
   }
 
   return {
+    // @ts-ignore
     ...toRefs(apiState),
+    // @ts-ignore
     ...toRefs(globalState),
     fetchArticlesList,
     fetchMoreArticlesList,

@@ -1,8 +1,8 @@
 <template>
   <v-app :dark="goDark">
-    <v-content>
+    <v-main>
       <nuxt />
-    </v-content>
+    </v-main>
     <v-footer :fixed="true" app>
       <footerMenu></footerMenu>
     </v-footer>

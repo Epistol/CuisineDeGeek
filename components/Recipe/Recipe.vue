@@ -58,6 +58,7 @@ export default defineComponent({
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
+    // @ts-ignore
     const { fetchArticleForUserLang, article } = usePosts({ ctx })
     const slug = ctx.root.$route.params?.article
 

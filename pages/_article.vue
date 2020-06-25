@@ -28,8 +28,6 @@ export default defineComponent({
     const { fetchArticleForUserLang, article } = usePosts({ ctx })
     const slug = ctx.root.$route.params?.article
     onMounted(async () => {
-      // await fetchArticleForUserLang(slug, subcategory =  'recipe')
-      // await fetchArticleForUserLang(slug, null, 'recipe')
       await fetchArticleForUserLang({ articleSlug: slug, subcategory: 'recipe' })
     })
 

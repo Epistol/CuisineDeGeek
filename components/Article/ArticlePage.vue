@@ -52,7 +52,7 @@ export default defineComponent({
     }
 
     onMounted(async () => {
-      await fetchArticleForUserLang(slug)
+      await fetchArticleForUserLang({ articleSlug: slug, subcategory: 'recipe' })
     })
 
     return { article, getFeaturedImage, colorAccentStyles, slug }
