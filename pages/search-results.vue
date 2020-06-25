@@ -75,7 +75,7 @@ export default {
       this.isLoading = true
 
       // Lazily load input items
-      fetch(`${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/search`)
+      fetch(`${process.env.NUXT_ENV_WORDPRESS_API_URL}/wp-json/wp/v2/search`)
         .then(res => res.json())
         .then(res => {
           this.entries = res

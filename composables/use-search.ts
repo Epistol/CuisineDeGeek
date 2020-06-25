@@ -23,7 +23,7 @@ export default function useSearch({ ctx }: Options) {
   ) => {
     apiState.fetching = true
 
-    const { data } = await ctx.root.$axios.get(`${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/search`, {
+    const { data } = await ctx.root.$axios.get(`${process.env.NUXT_ENV_WORDPRESS_API_URL}/wp-json/wp/v2/search`, {
       params: {
         per_page: 10,
         search: searchContent,
