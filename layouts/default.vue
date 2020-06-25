@@ -2,8 +2,8 @@
   <v-app :dark="goDark">
     <header class="toolbar">
       <v-container>
-        <v-row>
-          <v-col class="flex items-center justify-center" cols="3">
+        <v-row align="center" justify="center">
+          <v-col align="center" justify="center" class="items-center justify-center" cols="3">
             <nuxt-link :to="`/`">
               <v-btn text>
                 <v-icon left color="white">far fa-file-alt</v-icon>
@@ -17,13 +17,19 @@
               </v-btn>
             </nuxt-link>
           </v-col>
-          <v-col cols="6">
+          <v-col cols="6" align="center" justify="center">
             <nuxt-link :to="`/`">
               <img data-src="/logo.svg" v-lazy-load :alt="title" />
             </nuxt-link>
             <SearchBar></SearchBar>
           </v-col>
-          <v-col cols="3" id="social" class="flex items-center justify-center">
+          <v-col
+            cols="3"
+            align="center"
+            justify="center"
+            id="social"
+            class="items-center justify-center"
+          >
             <v-btn text href="https://cuisinedegeek.com/shop">
               <v-icon left color="white">fas fa-shopping-cart</v-icon>
               <span class="text-white">{{ $t('common.menu.shop') }}</span>

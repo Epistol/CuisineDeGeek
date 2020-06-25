@@ -55,7 +55,6 @@ export default {
     },
     items() {
       return this.entries.map(entry => {
-        console.log('items -> entry', entry)
         const Description =
           entry.title.length > this.descriptionLimit ? entry.title.slice(0, this.descriptionLimit) + '...' : entry.title
 
