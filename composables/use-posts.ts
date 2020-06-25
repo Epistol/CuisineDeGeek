@@ -37,7 +37,7 @@ export default function usePosts({ ctx }: Options) {
     apiState.fetching = true
 
     const { data } = await ctx.root.$axios.get(
-      `${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/${subtype}?orderby=date&per_page=10&_embed`,
+      `${process.env.NUXT_ENV_WORDPRESS_API_URL}/wp-json/wp/v2/${subtype}?orderby=date&per_page=10&_embed`,
       {
         params: {
           _embed: true
@@ -50,7 +50,7 @@ export default function usePosts({ ctx }: Options) {
   const fetchMoreArticlesList = async (infiniteLoadingPage: number) => {
     apiState.fetching = true
 
-    const { data } = await ctx.root.$axios.get(`${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/posts`, {
+    const { data } = await ctx.root.$axios.get(`${process.env.NUXT_ENV_WORDPRESS_API_URL}/wp-json/wp/v2/posts`, {
       params: {
         orderby: 'date',
         per_page: 10,
@@ -77,13 +77,16 @@ export default function usePosts({ ctx }: Options) {
   const fetchArticleData = async (config: ArticleConfig) => {
     apiState.fetching = true
 
-    const { data } = await ctx.root.$axios.get(`${process.env.WORDPRESS_API_URL}/wp-json/wp/v2/${config.subcategory}`, {
-      params: {
-        slug: config.articleSlug,
-        id: config.id,
-        _embed: true
+    const { data } = await ctx.root.$axios.get(
+      `${process.env.NUXT_ENV_WORDPRESS_API_URL}/wp-json/wp/v2/${config.subcategory}`,
+      {
+        params: {
+          slug: config.articleSlug,
+          id: config.id,
+          _embed: true
+        }
       }
-    })
+    )
     globalState.article = data
     return data
   }
