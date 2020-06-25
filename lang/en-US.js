@@ -1,4 +1,4 @@
-{
+export default {
   "common": {
     "recipe": {
       "last": "Last recipe | Last recipes",

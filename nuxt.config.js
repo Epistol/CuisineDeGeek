@@ -1,5 +1,4 @@
 import colors from 'vuetify/es5/util/colors'
-import i18n from '~/config/i18n.js'
 export default {
   mode: 'universal',
   /*
@@ -55,7 +54,20 @@ export default {
     '@nuxtjs/dotenv',
     [
       'nuxt-i18n',
-      i18n,
+      {
+        locales: [
+          { code: 'en', iso: 'en_US', file: 'en-US.js' },
+          { code: 'fr', iso: 'fr-FR', file: 'fr-FR.js' }
+        ],
+        defaultLocale: 'en',
+        strategy: 'prefix_and_default',
+        detectBrowserLanguage: {
+          useCookie: true,
+          alwaysRedirect: true
+        },
+        lazy: true,
+        langDir: 'lang/'
+      }
     ],
   ],
   /*
