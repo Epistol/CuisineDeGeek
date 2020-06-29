@@ -2,7 +2,7 @@
   <div class="home">
     <div class="articles">
       <!-- <TheHero :hero-article="articlesList[0]" /> -->
-      <h1 class="text-xl">{{ $tc('common.recipe.last', articles.length) }}</h1>
+      <h1 class>{{ $tc('common.recipe.last', articles.length) }}</h1>
       <ArticleList :articles="articles" v-if="articles.length" />
       <!-- <client-only>
         <InfiniteLoading ref="infiniteLoading" @infinite="moreArticles">

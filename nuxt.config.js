@@ -25,6 +25,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '~assets/scss/tailwind.scss',
   ],
   /*
   ** Plugins to load before mounting the App
@@ -45,9 +46,9 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    'cookie-universal-nuxt',
     ['nuxt-lazy-load', {
       directiveOnly: true,
     }],
@@ -61,16 +62,31 @@ export default {
           { code: 'fr', iso: 'fr-FR', file: 'fr-FR.js', name: 'Français' }
         ],
         defaultLocale: 'en',
-        strategy: 'prefix_and_default',
         detectBrowserLanguage: {
           useCookie: true,
-          alwaysRedirect: true
         },
         lazy: true,
         langDir: 'lang/'
       }
     ],
+    'nuxt-purgecss',
+    '@nuxtjs/google-gtag'
   ],
+  purgeCSS: {
+    mode: 'postcss',
+    enabled: (process.env.NODE_ENV === 'production')
+  },
+
+  'google-gtag': {
+    id: 'UA-56116805-1',
+    config: {
+      anonymize_ip: true, // anonymize IP
+      send_page_view: false, // might be necessary to avoid duplicated page track on page reload
+    },
+    debug: true, // enable to track in dev mode
+    disableAutoPageTrack: false, // disable if you don't want to track each page route with router.afterEach(...).
+  },
+
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
@@ -107,6 +123,8 @@ export default {
     },
     defaultAssets: { icons: 'fa' }
   },
+
+
   /*
   ** Build configuration
   */

@@ -13,13 +13,13 @@
             <nuxt-link :to="`/`">
               <v-btn text>
                 <v-icon left color="white">fa-utensils</v-icon>
-                <span class="text-white">{{ $t('common.menu.recipe') }}</span>
+                <span class="menu-text">{{ $t('common.menu.recipe') }}</span>
               </v-btn>
             </nuxt-link>
             <nuxt-link :to="`/`">
               <v-btn text>
                 <v-icon left color="white">fas fa-hat-wizard</v-icon>
-                <span class="text-white">{{ $t('common.menu.universe') }}</span>
+                <span class="menu-text">{{ $t('common.menu.universe') }}</span>
               </v-btn>
             </nuxt-link>
           </v-col>
@@ -39,7 +39,7 @@
           >
             <v-btn text href="https://cuisinedegeek.com/shop">
               <v-icon left color="white">fas fa-shopping-cart</v-icon>
-              <span class="text-white">{{ $t('common.menu.shop') }}</span>
+              <span class="menu-text">{{ $t('common.menu.shop') }}</span>
             </v-btn>
             <v-btn icon color="white" :href="`https://www.facebook.com/Cuisine2Geek`">
               <v-icon>fab fa-facebook</v-icon>
@@ -64,26 +64,32 @@
     </v-footer>
     <v-footer class="hidden-sm-and-down">
       <LangSwitcher></LangSwitcher>
+      <!-- <client-only>
+        <Cookies />
+      </client-only>-->
     </v-footer>
   </v-app>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from '@vue/composition-api'
+import { defineComponent, ref, watch, computed } from '@vue/composition-api'
 import footerMenu from '~/components/Menu/FooterMenu.vue'
 import LangSwitcher from '~/components/Menu/LangSwitcher.vue'
 import SearchBar from '~/components/SearchBar.vue'
+import Cookies from '~/components/Cookies.vue'
 
 export default defineComponent({
   name: 'DefaultLayout',
   components: {
     footerMenu,
     SearchBar,
-    LangSwitcher
+    LangSwitcher,
+    Cookies
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
     let goDark = ref<boolean>(false)
+    const locale = computed(() => ctx.root.$i18n.locale)
     watch(goDark, (value, prevValue) => {
       ctx.root.$vuetify.theme.dark = value
     })
@@ -91,7 +97,8 @@ export default defineComponent({
     const title = ref('Cuisine De Geek')
     return {
       title,
-      goDark
+      goDark,
+      locale
     }
   }
 })

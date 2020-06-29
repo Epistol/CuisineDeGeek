@@ -1,9 +1,9 @@
 <template>
   <div>
     <nuxt-link
-      v-for="locale in availableLocales"
-      :key="locale.code"
-      :to="changeLocale(locale.code)"
+      v-for="(locale,i) in availableLocales "
+      :key="i"
+      :to="switchLocalePath(locale.code)"
     >{{ locale.name }}</nuxt-link>
   </div>
 </template>
@@ -18,7 +18,9 @@ export default defineComponent({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
     // @ts-ignore
-    const availableLocales = computed(() => ctx.root.$i18n.locales.filter(i => i.code !== ctx.root.$i18n.locale))
+    const availableLocales = computed(() =>
+      ctx.root.$i18n.locales.filter(locale => locale.code !== ctx.root.$i18n.locale)
+    )
     const changeLocale = async (locale: string) => {
       // ctx.root.$i18n.setLocaleCookie(locale)
       console.log('we entered changeLocale')
