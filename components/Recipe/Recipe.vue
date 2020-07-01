@@ -1,30 +1,24 @@
 <template>
-  <article class="single">
+  <article class="single" v-if="propData">
     <v-row class="mt-6 mb-6">
       <v-col cols="3">
-        <!-- <FeaturedImage
-          v-if="getFeaturedImage(data, 'large')"
-          :article="data"
-          :featured-image="getFeaturedImage(data, 'large')"
-        />-->
-
         <v-card class shaped style="border-radius: 1rem !important;">
           <v-img
-            v-if="getFeaturedImage(data, 'large')"
-            :src="getFeaturedImage(data, 'large').source_url"
+            v-if="getFeaturedImage(propData, 'large')"
+            :src="getFeaturedImage(propData, 'large').source_url"
             height="200px"
             class="rounded-lg"
           ></v-img>
 
           <v-card-title>{{ $tc('common.recipe.ingredient', 2) }}</v-card-title>
-          <v-card-text v-if="data.acf.ingredients">
-            <Ingredients :data="data.acf.ingredients"></Ingredients>
+          <v-card-text v-if="propData.acf">
+            <Ingredients :data="propData.acf.ingredients"></Ingredients>
           </v-card-text>
         </v-card>
       </v-col>
       <v-col cols="4" offset="1">
-        <TitleCard :data="data"></TitleCard>
-        <steps v-if="data" :steps="data.acf.steps"></steps>
+        <TitleCard :data="propData" v-if="propData"></TitleCard>
+        <steps v-if="propData" :steps="propData.acf.steps"></steps>
         <comments></comments>
       </v-col>
       <v-col cols="2" offset="1">
@@ -35,7 +29,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onMounted, ref } from '@vue/composition-api'
+import { defineComponent, reactive, onMounted, ref, computed } from '@vue/composition-api'
 import usePosts from '~/composables/use-posts'
 import FeaturedImage from '~/components/Recipe/FeaturedImage.vue'
 import Steps from '~/components/Recipe/Steps.vue'
@@ -61,18 +55,19 @@ export default defineComponent({
     // @ts-ignore
     const { fetchArticleForUserLang, article } = usePosts({ ctx })
     const slug = ctx.root.$route.params?.article
-
+    const propData = computed(() => props.data)
     const colorAccentStyles = ref<any>(null)
 
     const getFeaturedImage = (article: any, size: any) => {
-      const featuredImage = article._embedded['wp:featuredmedia']
+      let featuredImage = null
+      featuredImage = article._embedded['wp:featuredmedia']
 
       if (featuredImage) {
         return featuredImage[0].media_details.sizes[size]
       }
     }
 
-    return { article, getFeaturedImage, colorAccentStyles, slug }
+    return { article, getFeaturedImage, colorAccentStyles, slug, propData }
   }
 })
 </script>

@@ -77,15 +77,15 @@ export default {
     enabled: (process.env.NODE_ENV === 'production')
   },
 
-  'google-gtag': {
-    id: 'UA-56116805-1',
-    config: {
-      anonymize_ip: true, // anonymize IP
-      send_page_view: false, // might be necessary to avoid duplicated page track on page reload
-    },
-    debug: true, // enable to track in dev mode
-    disableAutoPageTrack: false, // disable if you don't want to track each page route with router.afterEach(...).
-  },
+  // 'google-gtag': {
+  //   id: 'UA-56116805-1',
+  //   config: {
+  //     anonymize_ip: true, // anonymize IP
+  //     send_page_view: false, // might be necessary to avoid duplicated page track on page reload
+  //   },
+  //   debug: true, // enable to track in dev mode
+  //   disableAutoPageTrack: false, // disable if you don't want to track each page route with router.afterEach(...).
+  // },
 
   /*
   ** Axios module configuration

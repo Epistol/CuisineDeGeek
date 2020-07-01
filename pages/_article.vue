@@ -1,7 +1,7 @@
 <template>
   <div class="w-full">
     <template v-if="article[0]">
-      <template v-if="article[0].type !== 'recipe'">
+      <template v-if="article[0].type === 'recipe'">
         <Recipe :data="article[0]" v-if="article[0]" type="recipe" />
       </template>
     </template>
