@@ -6,6 +6,7 @@
           <ArticleImage
             :imageLink="propArticle._links['wp:featuredmedia'][0].href"
             :class-prop="'rounded-l-xl'"
+            height="200px"
           />
         </v-col>
         <v-col

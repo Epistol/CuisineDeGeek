@@ -1,5 +1,9 @@
 export default {
   "common": {
+    "comments": "Comments",
+    "ads": {
+      "title": "Advertisement"
+    },
     "recipe": {
       "last": "Last recipe | Last recipes",
       "ingredient": "Ingredient | Ingredients",

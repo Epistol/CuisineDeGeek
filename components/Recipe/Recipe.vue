@@ -1,28 +1,26 @@
 <template>
   <article class="single" v-if="propData">
-    <v-row class="mt-6 mb-6">
-      <v-col cols="3">
+    <v-row class="">
+      <v-col cols="4">
         <v-card class shaped style="border-radius: 1rem !important;">
           <v-img
-            v-if="getFeaturedImage(propData, 'large')"
-            :src="getFeaturedImage(propData, 'large').source_url"
+            v-if="getFeaturedImage(propData, 'full')"
+            :src="getFeaturedImage(propData, 'full').source_url"
             height="200px"
             class="rounded-lg"
           ></v-img>
-
-          <v-card-title>{{ $tc('common.recipe.ingredient', 2) }}</v-card-title>
-          <v-card-text v-if="propData.acf">
-            <Ingredients :data="propData.acf.ingredients"></Ingredients>
-          </v-card-text>
+          <template v-if="propData.acf" id="ingredients">
+            <v-card-title class="font-weight-bold">{{ $tc('common.recipe.ingredient', 2) }}</v-card-title>
+            <v-card-text>
+              <Ingredients :data="propData.acf.ingredients"></Ingredients>
+            </v-card-text>
+          </template>
         </v-card>
       </v-col>
-      <v-col cols="4" offset="1">
+      <v-col cols="7" offset="1">
         <TitleCard :data="propData" v-if="propData"></TitleCard>
         <steps v-if="propData" :steps="propData.acf.steps"></steps>
         <comments></comments>
-      </v-col>
-      <v-col cols="2" offset="1">
-        <!-- Widgets -->
       </v-col>
     </v-row>
   </article>
@@ -58,9 +56,9 @@ export default defineComponent({
     const propData = computed(() => props.data)
     const colorAccentStyles = ref<any>(null)
 
-    const getFeaturedImage = (article: any, size: any) => {
+    const getFeaturedImage = (recipe: any, size: any) => {
       let featuredImage = null
-      featuredImage = article._embedded['wp:featuredmedia']
+      featuredImage = recipe._embedded['wp:featuredmedia']
 
       if (featuredImage) {
         return featuredImage[0].media_details.sizes[size]

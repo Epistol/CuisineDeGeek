@@ -2,7 +2,7 @@
   <div>
     <v-card class="mx-auto" shaped style="border-radius: 1rem !important;">
       <v-card-text>
-        <p class="display-1 text--primary" v-html="data.title.rendered"></p>
+        <h1 class="mb-6 text-center" v-html="data.title.rendered"></h1>
         <div class="text--primary">
           <Metas :data="data"></Metas>
           <div class="content" v-html="data.content.rendered"></div>

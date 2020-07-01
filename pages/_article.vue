@@ -15,6 +15,7 @@ import Recipe from '~/components/Recipe/Recipe.vue'
 
 export default defineComponent({
   name: 'PageArticle',
+  layout: 'content',
   components: {
     Recipe
   },
