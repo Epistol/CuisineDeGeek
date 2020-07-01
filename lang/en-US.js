@@ -2,7 +2,8 @@ export default {
   "common": {
     "comments": "Comments",
     "ads": {
-      "title": "Advertisement"
+      "title": "Advertisement",
+      "shop": "🛒 Shop"
     },
     "recipe": {
       "last": "Last recipe | Last recipes",

@@ -49,6 +49,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     'cookie-universal-nuxt',
+    '@nuxtjs/proxy',
     ['@nuxtjs/google-adsense', {
       id: 'ca-pub-3386226072112083'
     }],
@@ -94,6 +95,16 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    proxy: true
+  },
+
+  proxy: {
+    '/api-shop': {
+      target: 'https://cuisinedegeek.myshopify.com/',
+      pathRewrite: {
+        '^/api-shop': '/'
+      }
+    }
   },
   /*
   ** vuetify module configuration

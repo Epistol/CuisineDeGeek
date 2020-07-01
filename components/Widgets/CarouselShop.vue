@@ -1,13 +1,20 @@
 <template>
-  <v-carousel cycle height="400" hide-delimiter-background show-arrows-on-hover v-if="products">
-    <v-carousel-item v-for="(product, i) in products" :key="i">
-      <v-sheet height="100%">
-        <v-row class="fill-height" align="center" justify="center">
-          <div class="display-3">{{ product.image.src }}</div>
-        </v-row>
-      </v-sheet>
-    </v-carousel-item>
-  </v-carousel>
+  <v-card shaped style="border-radius: 1rem !important" class="mt-10">
+    <template>
+      <v-card-title class="font-weight-bold">{{ $t('common.ads.shop') }}</v-card-title>
+      <v-card-text style="min-height:150px;min-width:150px">
+        <v-carousel cycle interval="12000" height="400" hide-delimiter-background show-arrows-on-hover v-if="products">
+          <v-carousel-item
+            v-for="(product, i) in products.products"
+            :key="i"
+            :src="product.image.src"
+            transition="fade-transition"
+          >
+          </v-carousel-item>
+        </v-carousel>
+      </v-card-text>
+    </template>
+  </v-card>
 </template>
 <script lang="ts">
 import { defineComponent, reactive, onMounted, ref, toRefs } from '@vue/composition-api'
@@ -25,7 +32,7 @@ export default defineComponent({
     })
 
     return {
-      ...toRefs(products)
+      products
     }
   }
 })

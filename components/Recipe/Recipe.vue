@@ -1,7 +1,7 @@
 <template>
   <article class="single" v-if="propData">
     <v-row class="">
-      <v-col cols="4">
+      <v-col :lg="4" :md="4" :sm="12">
         <v-card class shaped style="border-radius: 1rem !important;">
           <v-img
             v-if="getFeaturedImage(propData, 'full')"
@@ -17,7 +17,7 @@
           </template>
         </v-card>
       </v-col>
-      <v-col cols="7" offset="1">
+      <v-col :lg="7" :md="7" :sm="12" offset-xs="0" offset-md="1">
         <TitleCard :data="propData" v-if="propData"></TitleCard>
         <steps v-if="propData" :steps="propData.acf.steps"></steps>
         <comments></comments>

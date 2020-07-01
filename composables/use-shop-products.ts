@@ -1,4 +1,5 @@
 import { reactive, toRefs, SetupContext } from '@vue/composition-api'
+import products from '~/static/products/products.json'
 
 interface Options {
   ctx: SetupContext
@@ -27,11 +28,13 @@ export default function useShopProducts({ ctx }: Options) {
 
   const fetchProductsList = async () => {
     apiState.fetching = true
-    const sourceUrl = `${process.env.NUXT_ENV_SHOPIFY_API_URL}/admin/api/2020-04/products.json`
+    let data = {}
+    if (process.server) {
+      data = products
+    } else {
+      data = await ctx.root.$axios.get('/products/products.json').then(res => res.data)
+    }
 
-    const { data } = await ctx.root.$axios.get(sourceUrl, {
-      params: {}
-    })
     globalState.products = data
   }
 
