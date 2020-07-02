@@ -1,7 +1,21 @@
 import colors from 'vuetify/es5/util/colors'
+import axios from 'axios'
+
 const siteTitle = 'Cuisine De Geek'
 export default {
   mode: 'universal',
+
+  generate: {
+    routes() {
+      return axios.get(`${process.env.NUXT_ENV_WORDPRESS_API_URL}/wp-json/wp/v2/recipe`)
+        .then((res) => {
+          return res.data.map((data) => {
+            return '/' + data.slug
+          })
+        })
+    }
+  },
+
   /*
   ** Headers of the page
   */
