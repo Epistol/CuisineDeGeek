@@ -49,7 +49,6 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     'cookie-universal-nuxt',
-    '@nuxtjs/proxy',
     ['@nuxtjs/google-adsense', {
       id: 'ca-pub-3386226072112083'
     }],
@@ -73,20 +72,15 @@ export default {
         langDir: 'lang/'
       }
     ],
-    'nuxt-purgecss',
     '@nuxtjs/google-gtag'
   ],
-  purgeCSS: {
-    mode: 'postcss',
-    enabled: (process.env.NODE_ENV === 'production')
-  },
   'google-gtag': {
     id: 'UA-56116805-1',
     config: {
       anonymize_ip: true, // anonymize IP
       send_page_view: false, // might be necessary to avoid duplicated page track on page reload
     },
-    debug: true, // enable to track in dev mode
+    debug: false, // enable to track in dev mode
     disableAutoPageTrack: false, // disable if you don't want to track each page route with router.afterEach(...).
   },
 
@@ -98,14 +92,7 @@ export default {
     proxy: true
   },
 
-  proxy: {
-    '/api-shop': {
-      target: 'https://cuisinedegeek.myshopify.com/',
-      pathRewrite: {
-        '^/api-shop': '/'
-      }
-    }
-  },
+
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module
