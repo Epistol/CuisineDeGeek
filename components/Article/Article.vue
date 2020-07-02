@@ -1,24 +1,24 @@
 <template>
-  <article class="single">
+  <article class="single" v-if="propData">
     <!--  <FeaturedImage
-      v-if="getFeaturedImage(data, 'large')"
+      v-if="getFeaturedImage(propData, 'large')"
       :expanded="expanded"
-      :article="data"
-      :featured-image="getFeaturedImage(data, 'large')"
+      :article="propData"
+      :featured-image="getFeaturedImage(propData, 'large')"
     />-->
-    <div class="narrow" :class="{ 'no-featured-image': !getFeaturedImage(data, 'large') }">
+    <div class="narrow">
       <div class="meta">
-        <h1 class="title" v-html="data.title.rendered"></h1>
+        <!-- <h1 class="title" v-html="propData.title.rendered"></h1> -->
         <div class="details">
-          <!-- <span>{{ longTimestamp(data.date) }}</span> -->
+          <!-- <span>{{ longTimestamp(propData.date) }}</span> -->
           <span class="separator">|</span>
-          <nuxt-link class="author fancy" :to="`/authors/${data._embedded.author[0].slug}`">
-            <span>{{ data._embedded.author[0].name }}</span>
+          <!-- <nuxt-link class="author fancy" :to="`/authors/${propData._embedded.author[0].slug}`"> -->
+            <!-- <span>{{ propData._embedded.author[0].name }}</span> -->
           </nuxt-link>
         </div>
       </div>
-      <div class="content" v-html="data.content.rendered"></div>
-      <!-- <Comments :article="data" v-if="$store.state.enableComments && type === 'article'" /> -->
+      <!-- <div class="content" v-html="propData.content.rendered"></div> -->
+      <!-- <Comments :article="propData" v-if="$store.state.enableComments && type === 'article'" /> -->
     </div>
     <div v-if="colorAccentStyles" v-html="colorAccentStyles"></div>
   </article>
@@ -26,11 +26,11 @@
 
 
 <script lang="ts">
-import { defineComponent, reactive, onMounted, ref } from '@vue/composition-api'
+import { defineComponent, computed, reactive, onMounted, ref } from '@vue/composition-api'
 import usePosts from '~/composables/use-posts'
 
 export default defineComponent({
-  name: 'PageArticle',
+  name: 'Article',
   components: {},
   props: {
     data: Object,
@@ -40,22 +40,15 @@ export default defineComponent({
   setup(props, ctx) {
     const { fetchArticleForUserLang, article } = usePosts({ ctx })
     const slug = ctx.root.$route.params?.article
-
+    const propData = computed(() => props.data)
+    console.log('setup -> propData', propData.value)
     const colorAccentStyles = ref<any>(null)
-
-    const getFeaturedImage = (article: any, size: any) => {
-      const featuredImage = article._embedded['wp:featuredmedia']
-
-      if (featuredImage) {
-        return featuredImage[0].media_details.sizes[size]
-      }
-    }
 
     onMounted(async () => {
       await fetchArticleForUserLang({ articleSlug: slug, subcategory: 'recipe' })
     })
 
-    return { article, getFeaturedImage, colorAccentStyles, slug }
+    return { article, colorAccentStyles, slug, propData }
   }
 })
 </script>

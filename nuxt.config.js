@@ -25,6 +25,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '~assets/scss/tailwind.scss',
   ],
   /*
   ** Plugins to load before mounting the App
@@ -45,9 +46,13 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    'cookie-universal-nuxt',
+    '@nuxtjs/proxy',
+    ['@nuxtjs/google-adsense', {
+      id: 'ca-pub-3386226072112083'
+    }],
     ['nuxt-lazy-load', {
       directiveOnly: true,
     }],
@@ -57,25 +62,49 @@ export default {
       'nuxt-i18n',
       {
         locales: [
-          { code: 'en', iso: 'en_US', file: 'en-US.js' },
-          { code: 'fr', iso: 'fr-FR', file: 'fr-FR.js' }
+          { code: 'en', iso: 'en_US', file: 'en-US.js', name: 'English' },
+          { code: 'fr', iso: 'fr-FR', file: 'fr-FR.js', name: 'Français' }
         ],
         defaultLocale: 'en',
-        strategy: 'prefix_and_default',
         detectBrowserLanguage: {
           useCookie: true,
-          alwaysRedirect: true
         },
         lazy: true,
         langDir: 'lang/'
       }
     ],
+    'nuxt-purgecss',
+    '@nuxtjs/google-gtag'
   ],
+  purgeCSS: {
+    mode: 'postcss',
+    enabled: (process.env.NODE_ENV === 'production')
+  },
+  'google-gtag': {
+    id: 'UA-56116805-1',
+    config: {
+      anonymize_ip: true, // anonymize IP
+      send_page_view: false, // might be necessary to avoid duplicated page track on page reload
+    },
+    debug: true, // enable to track in dev mode
+    disableAutoPageTrack: false, // disable if you don't want to track each page route with router.afterEach(...).
+  },
+
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    proxy: true
+  },
+
+  proxy: {
+    '/api-shop': {
+      target: 'https://cuisinedegeek.myshopify.com/',
+      pathRewrite: {
+        '^/api-shop': '/'
+      }
+    }
   },
   /*
   ** vuetify module configuration
@@ -107,6 +136,8 @@ export default {
     },
     defaultAssets: { icons: 'fa' }
   },
+
+
   /*
   ** Build configuration
   */

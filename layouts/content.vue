@@ -3,13 +3,7 @@
     <header class="toolbar">
       <v-container>
         <v-row align="center" justify="center">
-          <v-col
-            align="center"
-            justify="center"
-            class="items-center justify-center hidden-sm-and-down"
-            cols="3"
-            sm="0"
-          >
+          <v-col align="center" justify="center" class="items-center justify-center hidden-sm-and-down" cols="3" sm="0">
             <nuxt-link :to="`/`">
               <v-btn text>
                 <v-icon left color="white">fa-utensils</v-icon>
@@ -56,7 +50,16 @@
     </header>
     <v-main>
       <v-container>
-        <nuxt />
+        <v-row class="mt-6 mb-6">
+          <v-col :lg="7" :md="7" :sm="12">
+            <nuxt />
+          </v-col>
+          <v-col :lg="4" :md="4" :sm="12" offset-md="1" :offset-sm="0" class="sm:mb-8">
+            <!-- Widgets -->
+            <adsense></adsense>
+            <carousel-shop></carousel-shop>
+          </v-col>
+        </v-row>
       </v-container>
     </v-main>
     <v-footer :fixed="true" app class="hidden-md-and-up">
@@ -77,14 +80,18 @@ import footerMenu from '~/components/Menu/FooterMenu.vue'
 import LangSwitcher from '~/components/Menu/LangSwitcher.vue'
 import SearchBar from '~/components/SearchBar.vue'
 import Cookies from '~/components/Cookies.vue'
+import Adsense from '~/components/Widgets/Adsense.vue'
+import CarouselShop from '~/components/Widgets/CarouselShop.vue'
 
 export default defineComponent({
-  name: 'DefaultLayout',
+  name: 'ContentLayout',
   components: {
     footerMenu,
     SearchBar,
     LangSwitcher,
-    Cookies
+    Cookies,
+    Adsense,
+    CarouselShop
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {

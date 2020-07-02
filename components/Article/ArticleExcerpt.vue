@@ -1,18 +1,23 @@
 <template>
   <div v-if="propArticle">
     <v-container>
-      <v-row no-gutters class="shadow">
-        <v-col v-if="propArticle._links" cols="3" class="rounded-md">
-          <ArticleImage :imageLink="propArticle._links['wp:featuredmedia'][0].href" />
+      <v-row no-gutters class="shadow rounded-r-xl">
+        <v-col v-if="propArticle._links" class="rounded-xl" :sm="6" :md="3">
+          <ArticleImage
+            :imageLink="propArticle._links['wp:featuredmedia'][0].href"
+            :class-prop="'rounded-l-xl'"
+            height="200px"
+          />
         </v-col>
         <v-col
           v-if="propArticle._links"
-          :cols="propArticle._links['wp:featuredmedia'][0].href ? 9 : 12"
-          class="bg-white rounded-r-md"
+          :sm="6"
+          :md="propArticle._links['wp:featuredmedia'][0].href ? 9 : 12"
+          class="bg-white rounded-r-xl"
         >
           <div class="p-4">
             <nuxt-link :to="`/${propArticle.slug}`">
-              <span class="text-xl" v-html="propArticle.title.rendered"></span>
+              <span class="recipe-title" v-html="propArticle.title.rendered"></span>
             </nuxt-link>
 
             <div class="mb-4 subtitle-1">

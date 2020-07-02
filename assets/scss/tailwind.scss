@@ -1,0 +1,58 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import 'fonts';
+
+.v-item-group.v-bottom-navigation .v-btn.v-size--default {
+  height: inherit;
+}
+
+body {
+  font-family: 'Avenir Next';
+}
+
+.v-application {
+  font-family: 'Avenir Next', sans-serif !important;
+
+  .title {
+    font-family: 'Avenir Next', sans-serif !important;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #413F47;
+}
+
+h1 {
+  @apply font-bold text-2xl;
+}
+
+
+.recipe-title {
+  @apply text-xl font-bold;
+  color: #413F47;
+}
+
+.menu-text {
+  @apply text-white font-semibold;
+}
+
+.rounded-xl {
+  border-radius: 12px;
+}
+
+.rounded-r-xl {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.rounded-l-xl {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
