@@ -43,7 +43,8 @@ export default {
     '@nuxtjs/vuetify',
     ['@nuxtjs/google-analytics', {
       id: 'UA-56116805-1'
-    }]
+    }],
+    '@aceforth/nuxt-netlify',
   ],
   /*
   ** Nuxt.js modules

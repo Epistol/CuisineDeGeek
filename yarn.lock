@@ -2,6 +2,15 @@
 # yarn lockfile v1
 
 
+"@aceforth/nuxt-netlify@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@aceforth/nuxt-netlify/-/nuxt-netlify-1.0.0.tgz#d18baaf9378f131361e689866503f5f1367c7cbb"
+  integrity sha512-vjgSoKF+PdpvZ+SVhgxSNJD3VW5tSe69B9n3MSMH5xIEwWwiubL61TWdr9K3Wm4nei6gR/fdnekWf3nBe2Zy7Q==
+  dependencies:
+    consola "^2.11.3"
+    fs-extra "^9.0.0"
+    lodash.template "^4.5.0"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.3", "@babel/code-frame@^7.5.5":
   version "7.10.3"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.3.tgz#324bcfd8d35cd3d47dae18cde63d752086435e9a"
