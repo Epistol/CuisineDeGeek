@@ -19,6 +19,7 @@ export default defineComponent({
   setup(props, ctx) {
     // @ts-ignore
     const availableLocales = computed(() =>
+    // @ts-ignore
       ctx.root.$i18n.locales.filter(locale => locale.code !== ctx.root.$i18n.locale)
     )
     const changeLocale = async (locale: string) => {
