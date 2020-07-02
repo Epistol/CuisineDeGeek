@@ -56,7 +56,6 @@
           </v-col>
           <v-col :lg="4" :md="4" :sm="12" offset-md="1" :offset-sm="0" class="sm:mb-8">
             <!-- Widgets -->
-            <adsense></adsense>
             <carousel-shop></carousel-shop>
           </v-col>
         </v-row>
@@ -80,7 +79,6 @@ import footerMenu from '~/components/Menu/FooterMenu.vue'
 import LangSwitcher from '~/components/Menu/LangSwitcher.vue'
 import SearchBar from '~/components/SearchBar.vue'
 import Cookies from '~/components/Cookies.vue'
-import Adsense from '~/components/Widgets/Adsense.vue'
 import CarouselShop from '~/components/Widgets/CarouselShop.vue'
 
 export default defineComponent({
@@ -90,7 +88,6 @@ export default defineComponent({
     SearchBar,
     LangSwitcher,
     Cookies,
-    Adsense,
     CarouselShop
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
