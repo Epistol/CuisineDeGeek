@@ -1,16 +1,9 @@
 <template>
-  <v-card shaped style="border-radius: 1rem !important" class="mt-10">
+  <v-card shaped style="border-radius: 1rem !important" class="mb-8">
     <template>
       <v-card-title class="font-weight-bold">{{ $t('common.ads.shop') }}</v-card-title>
       <v-card-text style="min-height:150px;min-width:150px">
-        <v-carousel
-          cycle
-          interval="12000"
-          height="400"
-          hide-delimiter-background
-          show-arrows-on-hover
-          v-if="products"
-        >
+        <v-carousel cycle interval="12000" height="400" hide-delimiter-background show-arrows-on-hover v-if="products">
           <v-carousel-item
             v-for="(product, i) in products.products"
             :key="i"

@@ -54,9 +54,10 @@
           <v-col :lg="7" :md="7" :sm="12">
             <nuxt />
           </v-col>
-          <v-col :lg="4" :md="4" :sm="12" offset-md="1" :offset-sm="0" class="sm:mb-8">
+          <v-col :lg="4" :md="4" :sm="12" offset-md="1" :offset-sm="0" class="">
             <!-- Widgets -->
             <carousel-shop></carousel-shop>
+            <adsense></adsense>
           </v-col>
         </v-row>
       </v-container>
@@ -80,6 +81,7 @@ import LangSwitcher from '~/components/Menu/LangSwitcher.vue'
 import SearchBar from '~/components/SearchBar.vue'
 import Cookies from '~/components/Cookies.vue'
 import CarouselShop from '~/components/Widgets/CarouselShop.vue'
+import Adsense from '~/components/Widgets/Adsense.vue'
 
 export default defineComponent({
   name: 'ContentLayout',
@@ -88,7 +90,8 @@ export default defineComponent({
     SearchBar,
     LangSwitcher,
     Cookies,
-    CarouselShop
+    CarouselShop,
+    Adsense
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
