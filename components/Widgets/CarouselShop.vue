@@ -1,5 +1,5 @@
 <template>
-  <v-card shaped style="border-radius: 1rem !important" class="mt-10">
+  <v-card shaped style="border-radius: 1rem !important" class="mb-10">
     <template>
       <v-card-title class="font-weight-bold">{{ $t('common.ads.shop') }}</v-card-title>
       <v-card-text style="min-height:150px;min-width:150px">

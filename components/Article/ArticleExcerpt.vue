@@ -7,6 +7,7 @@
             :imageLink="propArticle._links['wp:featuredmedia'][0].href"
             :class-prop="'rounded-l-xl'"
             height="200px"
+            :hrefProp="`/${propArticle.slug}`"
           />
         </v-col>
         <v-col
@@ -42,30 +43,30 @@
                   <global-time-pill :article="propArticle"></global-time-pill>
                   <Metas :data="propArticle"></Metas>
                 </div>
-                <div id="social" class="flex-auto">
-                  <social-sharing
-                    network-selected="facebook"
-                    :article-title="propArticle.title.rendered"
-                    :article-excerpt="propArticle.excerpt.rendered"
-                  ></social-sharing>
-                  <social-sharing
-                    network-selected="twitter"
-                    :article-title="propArticle.title.rendered"
-                    :article-excerpt="propArticle.excerpt.rendered"
-                  ></social-sharing>
-                  <!-- <social-sharing
+              </div>
+              <div id="social" class="mt-6">
+                <social-sharing
+                  network-selected="facebook"
+                  :article-title="propArticle.title.rendered"
+                  :article-excerpt="propArticle.excerpt.rendered"
+                ></social-sharing>
+                <social-sharing
+                  network-selected="twitter"
+                  :article-title="propArticle.title.rendered"
+                  :article-excerpt="propArticle.excerpt.rendered"
+                ></social-sharing>
+                <!-- <social-sharing
                       v-if="article._embedded['wp:featuredmedia']"
                       network-selected="pinterest"
                       :article-title="propArticle.title.rendered"
                       :article-excerpt="propArticle.excerpt.rendered"
                       :article-media="propArticle._links['wp:featuredmedia'][0].href"
-                  ></social-sharing>-->
-                  <social-sharing
-                    network-selected="email"
-                    :article-title="propArticle.title.rendered"
-                    :article-excerpt="propArticle.excerpt.rendered"
-                  ></social-sharing>
-                </div>
+                ></social-sharing>-->
+                <social-sharing
+                  network-selected="email"
+                  :article-title="propArticle.title.rendered"
+                  :article-excerpt="propArticle.excerpt.rendered"
+                ></social-sharing>
               </div>
             </div>
           </div>

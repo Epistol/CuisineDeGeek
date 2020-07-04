@@ -15,6 +15,8 @@ import ArticleList from '~/components/Article/ArticleList.vue'
 
 export default defineComponent({
   name: 'Index',
+  layout: 'content',
+
   components: {
     ArticleList
   },
