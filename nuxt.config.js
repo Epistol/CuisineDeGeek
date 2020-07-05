@@ -1,7 +1,22 @@
 import colors from 'vuetify/es5/util/colors'
+import axios from 'axios'
+
 const siteTitle = 'Cuisine De Geek'
 export default {
   mode: 'universal',
+
+  generate: {
+    fallback: true,
+    routes() {
+      return axios.get(`${process.env.NUXT_ENV_WORDPRESS_API_URL}/wp-json/wp/v2/recipe`)
+        .then((res) => {
+          return res.data.map((data) => {
+            return '/' + data.slug
+          })
+        })
+    }
+  },
+
   /*
   ** Headers of the page
   */
@@ -41,6 +56,10 @@ export default {
     '@nuxt/typescript-build',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/vuetify',
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-56116805-1'
+    }],
+    '@aceforth/nuxt-netlify',
   ],
   /*
   ** Nuxt.js modules
@@ -49,7 +68,6 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     'cookie-universal-nuxt',
-    '@nuxtjs/proxy',
     ['@nuxtjs/google-adsense', {
       id: 'ca-pub-3386226072112083'
     }],
@@ -73,22 +91,7 @@ export default {
         langDir: 'lang/'
       }
     ],
-    'nuxt-purgecss',
-    '@nuxtjs/google-gtag'
   ],
-  purgeCSS: {
-    mode: 'postcss',
-    enabled: (process.env.NODE_ENV === 'production')
-  },
-  'google-gtag': {
-    id: 'UA-56116805-1',
-    config: {
-      anonymize_ip: true, // anonymize IP
-      send_page_view: false, // might be necessary to avoid duplicated page track on page reload
-    },
-    debug: true, // enable to track in dev mode
-    disableAutoPageTrack: false, // disable if you don't want to track each page route with router.afterEach(...).
-  },
 
   /*
   ** Axios module configuration
@@ -98,14 +101,7 @@ export default {
     proxy: true
   },
 
-  proxy: {
-    '/api-shop': {
-      target: 'https://cuisinedegeek.myshopify.com/',
-      pathRewrite: {
-        '^/api-shop': '/'
-      }
-    }
-  },
+
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module

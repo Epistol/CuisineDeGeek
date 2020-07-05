@@ -47,21 +47,6 @@ export default function usePosts({ ctx }: Options) {
     globalState.articles = data
   }
 
-  const fetchMoreArticlesList = async (infiniteLoadingPage: number) => {
-    apiState.fetching = true
-
-    const { data } = await ctx.root.$axios.get(`${process.env.NUXT_ENV_WORDPRESS_API_URL}/wp-json/wp/v2/posts`, {
-      params: {
-        orderby: 'date',
-        per_page: 10,
-        categories_exclude: process.env.FEATURED_CATEGORY_ID || null,
-        page: infiniteLoadingPage + 1,
-        _embed: true
-      }
-    })
-    globalState.articles = data
-  }
-
   const fetchArticleForUserLang = async (config: ArticleConfig) => {
     await fetchArticleData(config)
     if (globalState.article) {
@@ -97,7 +82,6 @@ export default function usePosts({ ctx }: Options) {
     // @ts-ignore
     ...toRefs(globalState),
     fetchArticlesList,
-    fetchMoreArticlesList,
     fetchArticleForUserLang
   }
 }

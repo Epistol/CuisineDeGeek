@@ -22,7 +22,7 @@ export default defineComponent({
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
-    const { articles, article, fetchArticlesList, fetchMoreArticlesList } = usePosts({ ctx })
+    const { articles, article, fetchArticlesList } = usePosts({ ctx })
 
     onMounted(async () => {
       await fetchArticlesList('recipe')

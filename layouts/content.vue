@@ -86,8 +86,8 @@ import footerMenu from '~/components/Menu/FooterMenu.vue'
 import LangSwitcher from '~/components/Menu/LangSwitcher.vue'
 import SearchBar from '~/components/SearchBar.vue'
 import Cookies from '~/components/Cookies.vue'
-import Adsense from '~/components/Widgets/Adsense.vue'
 import CarouselShop from '~/components/Widgets/CarouselShop.vue'
+import Adsense from '~/components/Widgets/Adsense.vue'
 
 export default defineComponent({
   name: 'ContentLayout',
@@ -96,8 +96,8 @@ export default defineComponent({
     SearchBar,
     LangSwitcher,
     Cookies,
-    Adsense,
-    CarouselShop
+    CarouselShop,
+    Adsense
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
