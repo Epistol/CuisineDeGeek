@@ -1,14 +1,9 @@
 <template>
   <article class="single" v-if="propData">
-    <v-row class="">
+    <v-row class>
       <v-col :lg="4" :md="4" :sm="12">
         <v-card class shaped style="border-radius: 1rem !important;">
-          <v-img
-            v-if="getFeaturedImage(propData, 'full')"
-            :src="getFeaturedImage(propData, 'full').source_url"
-            height="200px"
-            class="rounded-lg"
-          ></v-img>
+          <Rimage :data="propData"></Rimage>
           <template v-if="propData.acf" id="ingredients">
             <v-card-title class="font-weight-bold">{{ $tc('common.recipe.ingredient', 2) }}</v-card-title>
             <v-card-text>
@@ -34,6 +29,7 @@ import Steps from '~/components/Recipe/Steps.vue'
 import Ingredients from '~/components/Recipe/Ingredients.vue'
 import TitleCard from '~/components/Recipe/TitleCard.vue'
 import Comments from '~/components/Comments.vue'
+import Rimage from '~/components/Recipe/Rimage.vue'
 
 export default defineComponent({
   name: 'Recipe',
@@ -42,7 +38,8 @@ export default defineComponent({
     Steps,
     Ingredients,
     TitleCard,
-    Comments
+    Comments,
+    Rimage
   },
   props: {
     data: Object,
