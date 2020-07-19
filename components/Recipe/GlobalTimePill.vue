@@ -1,10 +1,10 @@
 <template>
   <v-chip class="mr-2" v-if="getGlobalTime(article.acf).sumMinutes > 0">
     <v-icon size="medium" class="ml-1" left>far fa-hourglass</v-icon>
-    <template
-      v-if="getGlobalTime(article.acf).remHours > 0"
-    >{{getGlobalTime(article.acf).remHours}}h{{leftFillNum(getGlobalTime(article.acf).remMinutes, 2)}}</template>
-    <template v-else>{{leftFillNum(getGlobalTime(article.acf).remMinutes, 2)}} min</template>
+    <template v-if="getGlobalTime(article.acf).remHours > 0"
+      >{{ getGlobalTime(article.acf).remHours }}h{{ leftFillNum(getGlobalTime(article.acf).remMinutes, 2) }}</template
+    >
+    <template v-else>{{ leftFillNum(getGlobalTime(article.acf).remMinutes, 2) }} min</template>
   </v-chip>
 </template>
 

@@ -5,6 +5,8 @@
         <h1 class="mb-6 text-center" v-html="data.title.rendered"></h1>
         <div class="text--primary">
           <Metas :data="data"></Metas>
+          <!-- Times -->
+          <TimePills :article="data"></TimePills>
           <div class="content" v-html="data.content.rendered"></div>
         </div>
       </v-card-text>
@@ -15,11 +17,13 @@
 <script lang="ts">
 import { defineComponent, computed } from '@vue/composition-api'
 import Metas from '~/components/Recipe/Metas.vue'
+import TimePills from '~/components/Recipe/TimePills.vue'
 
 export default defineComponent({
   name: 'TitleCard',
   components: {
-    Metas
+    Metas,
+    TimePills
   },
   props: {
     data: Object

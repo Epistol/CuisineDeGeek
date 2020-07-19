@@ -8,17 +8,11 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import GlobalTimePill from '~/components/Recipe/GlobalTimePill.vue'
-import Metas from '~/components/Recipe/Metas.vue'
-import SocialSharing from '~/components/Article/SocialSharing.vue'
 import ArticleExcerpt from '~/components/Article/ArticleExcerpt.vue'
 
 export default defineComponent({
   name: 'ArticleList',
   components: {
-    GlobalTimePill,
-    SocialSharing,
-    Metas,
     ArticleExcerpt
   },
   props: {
