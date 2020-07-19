@@ -7,7 +7,7 @@
             :imageLink="propArticle._links['wp:featuredmedia'][0].href"
             :class-prop="'rounded-l-xl'"
             height="200px"
-            :hrefProp="`/${propArticle.slug}`"
+            :hrefProp="slugUrl(propArticle.slug)"
           />
         </v-col>
         <v-col
@@ -17,7 +17,7 @@
           class="bg-white rounded-r-xl"
         >
           <div class="p-4">
-            <nuxt-link :to="`/${propArticle.slug}`">
+            <nuxt-link :to="slugUrl(propArticle.slug)">
               <span class="recipe-title" v-html="propArticle.title.rendered"></span>
             </nuxt-link>
 
@@ -93,7 +93,20 @@ export default defineComponent({
   setup(props, ctx) {
     const propArticle = computed(() => props.article)
 
-    return { propArticle }
+    const slugUrl = (slug: string) => {
+      const Cookie = process.client ? require('js-cookie') : undefined
+      const cookieLang = Cookie.get('i18n_redirected')
+
+      let slugUrl = null
+      if (cookieLang) {
+        slugUrl = cookieLang + '/' + slug + '/'
+      } else {
+        slugUrl = slug + '/'
+      }
+      return slugUrl
+    }
+
+    return { propArticle, slugUrl }
   }
 })
 </script>

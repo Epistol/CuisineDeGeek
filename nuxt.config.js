@@ -81,11 +81,13 @@ export default {
       {
         locales: [
           { code: 'en', iso: 'en_US', file: 'en-US.js', name: 'English' },
-          { code: 'fr', iso: 'fr-FR', file: 'fr-FR.js', name: 'Français' }
+          { code: 'fr', iso: 'fr-FR', file: 'fr-FR.js', name: 'Français' },
+          { code: 'ja', iso: 'ja', file: 'jp-JP.js', name: '日本人' }
         ],
         defaultLocale: 'en',
         detectBrowserLanguage: {
           useCookie: true,
+          alwaysRedirect: true
         },
         lazy: true,
         langDir: 'lang/'

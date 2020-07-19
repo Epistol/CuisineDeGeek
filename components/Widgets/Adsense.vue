@@ -14,22 +14,22 @@
           data-full-width-responsive="true"
         ></ins>
         <script>
-          ;(adsbygoogle = window.adsbygoogle || []).push({})
+  ;(adsbygoogle = window.adsbygoogle || []).push({})
         </script>
       </v-card-text>
     </template>
+  </v-card>
+</template>
 
     <script lang="ts">
-      import { defineComponent, reactive, onMounted, ref, computed } from '@vue/composition-api'
+import { defineComponent, reactive, onMounted, ref, computed } from '@vue/composition-api'
 
-      export default defineComponent({
-        name: 'Adsense',
+export default defineComponent({
+  name: 'Adsense',
 
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        setup(props, ctx) {
-          return {}
-        }
-      })
-    </script>
-  </v-card></template
->
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  setup(props, ctx) {
+    return {}
+  }
+})
+</script>

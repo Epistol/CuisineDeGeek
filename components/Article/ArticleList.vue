@@ -1,5 +1,5 @@
 <template>
-  <div class="article-list">
+  <div class="article-list" v-if="articles">
     <article v-for="article in articles" :key="article.id">
       <ArticleExcerpt :article="article" />
     </article>

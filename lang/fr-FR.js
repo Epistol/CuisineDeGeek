@@ -2,12 +2,13 @@ export default {
   "common": {
     "comments": "Commentaires",
     "ads": {
-      "title": "Publicité"
+      "title": "Publicité",
+      "shop": "🛒 Boutique"
     },
     "recipe": {
       "last": "Recette | Nos dernières recettes",
-      "ingredient": "Ingredient | Ingredients",
-      "step": "Etape | Etape"
+      "ingredient": "Ingrédient | Ingrédients",
+      "step": "Etape | Etapes"
     },
     "menu": {
       "recipe": "Recette",
@@ -15,7 +16,7 @@ export default {
       "shop": "Boutique"
     },
     "search": {
-      "title": "Resultats pour votre recherche : "
+      "title": "Résultats pour "
     }
   }
 }

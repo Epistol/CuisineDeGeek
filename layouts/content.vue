@@ -10,13 +10,13 @@
             cols="3"
             sm="0"
           >
-            <nuxt-link :to="`/`">
+            <nuxt-link :to="slugUrl()">
               <v-btn text>
                 <v-icon left color="white">fa-utensils</v-icon>
                 <span class="menu-text">{{ $t('common.menu.recipe') }}</span>
               </v-btn>
             </nuxt-link>
-            <nuxt-link :to="`/`">
+            <nuxt-link :to="slugUrl()">
               <v-btn text>
                 <v-icon left color="white">fas fa-hat-wizard</v-icon>
                 <span class="menu-text">{{ $t('common.menu.universe') }}</span>
@@ -24,7 +24,7 @@
             </nuxt-link>
           </v-col>
           <v-col :lg="6" :md="6" :sm="12" align="center" justify="center">
-            <nuxt-link :to="`/`">
+            <nuxt-link :to="slugUrl()">
               <img data-src="/logo.svg" v-lazy-load :alt="title" />
             </nuxt-link>
             <SearchBar></SearchBar>
@@ -108,10 +108,26 @@ export default defineComponent({
     })
 
     const title = ref('Cuisine De Geek')
+
+    const slugUrl = () => {
+      const Cookie = process.client ? require('js-cookie') : undefined
+      const cookieLang = process.client ? (Cookie.get('i18n_redirected') ? Cookie.get('i18n_redirected') : null) : null
+
+      let slugUrl = null
+
+      if (cookieLang) {
+        slugUrl = '/' + cookieLang
+      } else {
+        slugUrl = '/'
+      }
+      return slugUrl
+    }
+
     return {
       title,
       goDark,
-      locale
+      locale,
+      slugUrl
     }
   }
 })
