@@ -115,7 +115,7 @@ export default defineComponent({
 
       let slugUrl = null
 
-      if (cookieLang) {
+      if (cookieLang && cookieLang !== ctx.root.$i18n.defaultLocale) {
         slugUrl = '/' + cookieLang
       } else {
         slugUrl = '/'
