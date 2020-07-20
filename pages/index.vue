@@ -1,9 +1,9 @@
 <template>
   <div class="home">
-    <div class="articles">
+    <div class="articles" v-if="articles.length">
       <!-- <TheHero :hero-article="articlesList[0]" /> -->
-      <h1 class>{{ $tc('common.recipe.last', articles.length) }}</h1>
-      <ArticleList :articles="articles" v-if="articles.length" />
+      <h1 class v-cloak>{{ $tc('common.recipe.last', articles.length) }}</h1>
+      <ArticleList :articles="articles" />
     </div>
   </div>
 </template>
@@ -15,6 +15,8 @@ import ArticleList from '~/components/Article/ArticleList.vue'
 
 export default defineComponent({
   name: 'Index',
+  layout: 'content',
+
   components: {
     ArticleList
   },

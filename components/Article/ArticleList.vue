@@ -1,25 +1,27 @@
 <template>
-  <div class="article-list">
+  <div class="article-list" v-if="articles">
     <article v-for="article in articles" :key="article.id">
-      <ArticleExcerpt :article="article" />
+      <template v-if="article.type === 'recipe'">
+        <RecipeExcerpt :article="article" />
+      </template>
+
+      <template v-else>
+        <ArticleExcerpt :article="article" />
+      </template>
     </article>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
-import GlobalTimePill from '~/components/Recipe/GlobalTimePill.vue'
-import Metas from '~/components/Recipe/Metas.vue'
-import SocialSharing from '~/components/Article/SocialSharing.vue'
 import ArticleExcerpt from '~/components/Article/ArticleExcerpt.vue'
+import RecipeExcerpt from '~/components/Recipe/Excerpt.vue'
 
 export default defineComponent({
   name: 'ArticleList',
   components: {
-    GlobalTimePill,
-    SocialSharing,
-    Metas,
-    ArticleExcerpt
+    ArticleExcerpt,
+    RecipeExcerpt
   },
   props: {
     articles: Array

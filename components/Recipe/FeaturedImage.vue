@@ -1,7 +1,6 @@
 <template>
   <div>
     <div v-if="featuredImage.source_url" class>
-      <!-- <div class="image-height" :style="{ paddingTop: featuredImageAspectRatio }"></div> -->
       <img
         :alt="article._embedded['wp:featuredmedia'][0].alt_text"
         :title="article._embedded['wp:featuredmedia'][0].alt_text"
@@ -9,7 +8,6 @@
         v-lazy-load
         class="rounded-lg"
       />
-      <!-- <div class="featured-image-padding" :style="{ paddingTop: featuredImageAspectRatio }"></div> -->
     </div>
   </div>
 </template>

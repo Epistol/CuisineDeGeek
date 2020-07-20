@@ -10,10 +10,10 @@
       <v-icon>fas fa-shopping-cart</v-icon>
     </v-btn>
 
-    <v-btn value="universes">
+    <!-- <v-btn value="universes">
       <span>Universes</span>
       <v-icon>fa-hat-wizard</v-icon>
-    </v-btn>
+    </v-btn>-->
   </v-bottom-navigation>
 </template>
 

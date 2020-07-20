@@ -1,12 +1,14 @@
 <template>
   <div>
-    <v-img
-      :class="propClasses"
-      v-if="propImageLink"
-      :height="propHeight"
-      :alt="propImageLink.alt_text"
-      :src="searchResult.source_url"
-    ></v-img>
+    <nuxt-link :to="propHref">
+      <v-img
+        :class="propClasses"
+        v-if="propImageLink"
+        :height="propHeight"
+        :alt="propImageLink.alt_text"
+        :src="searchResult.source_url"
+      ></v-img>
+    </nuxt-link>
   </div>
 </template>
 
@@ -19,7 +21,8 @@ export default defineComponent({
   props: {
     imageLink: String,
     classProp: String,
-    height: String
+    height: String,
+    hrefProp: String
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
@@ -28,6 +31,7 @@ export default defineComponent({
     const propImageLink = computed(() => props.imageLink)
     const propClasses = computed(() => props.classProp)
     const propHeight = computed(() => props.height)
+    const propHref = computed(() => props.hrefProp)
 
     const loadFullDataset = async (val: any) => {
       // We need to load the data from the value passed, call api, then return the api data
@@ -39,7 +43,7 @@ export default defineComponent({
       await loadFullDataset(propImageLink.value)
     })
 
-    return { propImageLink, propClasses, propHeight, ...toRefs(globalState) }
+    return { propImageLink, propClasses, propHeight, ...toRefs(globalState), propHref }
   }
 })
 </script>

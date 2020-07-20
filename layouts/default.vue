@@ -16,12 +16,12 @@
                 <span class="menu-text">{{ $t('common.menu.recipe') }}</span>
               </v-btn>
             </nuxt-link>
-            <nuxt-link :to="`/`">
+            <!-- <nuxt-link :to="`/`">
               <v-btn text>
                 <v-icon left color="white">fas fa-hat-wizard</v-icon>
                 <span class="menu-text">{{ $t('common.menu.universe') }}</span>
               </v-btn>
-            </nuxt-link>
+            </nuxt-link>-->
           </v-col>
           <v-col :lg="6" :md="6" :sm="12" align="center" justify="center">
             <nuxt-link :to="`/`">

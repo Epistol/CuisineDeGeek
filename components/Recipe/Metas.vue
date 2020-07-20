@@ -8,7 +8,7 @@
           <template>{{ data.acf.servings }}</template>
         </v-chip>
       </template>
-      <span>Servings</span>
+      <span>{{ $t('common.recipe.servings') }}</span>
     </v-tooltip>
     <!-- Universe -->
     <v-chip class="mr-2" v-if="data.acf.universe">
@@ -23,7 +23,7 @@
           <template>{{ difficulties[data.acf.difficulty] }}</template>
         </v-chip>
       </template>
-      <span>Difficulty</span>
+      <span>{{ $t('common.recipe.difficulty') }}</span>
     </v-tooltip>
   </span>
 </template>

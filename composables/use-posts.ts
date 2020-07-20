@@ -33,6 +33,9 @@ export default function usePosts({ ctx }: Options) {
     article: [{}]
   })
 
+  const Cookie = process.client ? require('js-cookie') : undefined
+  const cookieLang = process.client ? (Cookie.get('i18n_redirected') ? Cookie.get('i18n_redirected') : null) : null
+
   const fetchArticlesList = async (subtype: string = 'posts') => {
     apiState.fetching = true
 
@@ -40,7 +43,8 @@ export default function usePosts({ ctx }: Options) {
       `${process.env.NUXT_ENV_WORDPRESS_API_URL}/wp-json/wp/v2/${subtype}?orderby=date&per_page=10&_embed`,
       {
         params: {
-          _embed: true
+          _embed: true,
+          lang: cookieLang
         }
       }
     )
@@ -68,6 +72,7 @@ export default function usePosts({ ctx }: Options) {
         params: {
           slug: config.articleSlug,
           id: config.id,
+          lang: cookieLang,
           _embed: true
         }
       }

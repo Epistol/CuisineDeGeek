@@ -98,10 +98,10 @@ export default defineComponent({
       const cookieLang = Cookie.get('i18n_redirected')
 
       let slugUrl = null
-      if (cookieLang) {
-        slugUrl = cookieLang + '/' + slug + '/'
+      if (cookieLang && cookieLang !== ctx.root.$i18n.defaultLocale) {
+        slugUrl = cookieLang + '/recipe/' + slug + '/'
       } else {
-        slugUrl = slug + '/'
+        slugUrl = '/recipe/' + slug + '/'
       }
       return slugUrl
     }

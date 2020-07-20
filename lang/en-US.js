@@ -8,7 +8,15 @@ export default {
     "recipe": {
       "last": "Last recipe | Last recipes",
       "ingredient": "Ingredient | Ingredients",
-      "step": "Step | Steps"
+      "step": "Step | Steps",
+      "difficulty": "Difficulty",
+      "servings": "Servings",
+      "minutes": "mn",
+      "time": {
+        "prep": "Preparation Time",
+        "cook": "Cooking Time",
+        "rest": "Resting Time",
+      }
     },
     "menu": {
       "recipe": "Recipe",

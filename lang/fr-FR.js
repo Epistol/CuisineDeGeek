@@ -2,12 +2,21 @@ export default {
   "common": {
     "comments": "Commentaires",
     "ads": {
-      "title": "Publicité"
+      "title": "Publicité",
+      "shop": "🛒 Boutique"
     },
     "recipe": {
       "last": "Recette | Nos dernières recettes",
-      "ingredient": "Ingredient | Ingredients",
-      "step": "Etape | Etape"
+      "ingredient": "Ingrédient | Ingrédients",
+      "step": "Etape | Etapes",
+      "difficulty": "Difficulté",
+      "servings": "Parts",
+      "minutes": "mn",
+      "time": {
+        "prep": "Temps de préparation",
+        "cook": "Temps de cuisson",
+        "rest": "Temps de repos",
+      }
     },
     "menu": {
       "recipe": "Recette",
@@ -15,7 +24,7 @@ export default {
       "shop": "Boutique"
     },
     "search": {
-      "title": "Resultats pour votre recherche : "
+      "title": "Résultats pour "
     }
   }
 }

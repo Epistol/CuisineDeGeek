@@ -3,22 +3,32 @@
     <header class="toolbar">
       <v-container>
         <v-row align="center" justify="center">
-          <v-col align="center" justify="center" class="items-center justify-center hidden-sm-and-down" cols="3" sm="0">
-            <nuxt-link :to="`/`">
+          <v-col
+            align="center"
+            justify="center"
+            class="items-center justify-center hidden-sm-and-down"
+            cols="3"
+            sm="0"
+          >
+            <nuxt-link :to="slugUrl()">
               <v-btn text>
                 <v-icon left color="white">fa-utensils</v-icon>
                 <span class="menu-text">{{ $t('common.menu.recipe') }}</span>
               </v-btn>
             </nuxt-link>
-            <nuxt-link :to="`/`">
+            <!-- <nuxt-link :to="slugUrl()">
               <v-btn text>
                 <v-icon left color="white">fas fa-hat-wizard</v-icon>
                 <span class="menu-text">{{ $t('common.menu.universe') }}</span>
               </v-btn>
-            </nuxt-link>
+            </nuxt-link>-->
+            <v-btn text href="https://cuisinedegeek.com/shop">
+              <v-icon left color="white">fas fa-shopping-cart</v-icon>
+              <span class="menu-text">{{ $t('common.menu.shop') }}</span>
+            </v-btn>
           </v-col>
           <v-col :lg="6" :md="6" :sm="12" align="center" justify="center">
-            <nuxt-link :to="`/`">
+            <nuxt-link :to="slugUrl()">
               <img data-src="/logo.svg" v-lazy-load :alt="title" />
             </nuxt-link>
             <SearchBar></SearchBar>
@@ -31,10 +41,6 @@
             class="items-center justify-center hidden-sm-and-down"
             sm="0"
           >
-            <v-btn text href="https://cuisinedegeek.com/shop">
-              <v-icon left color="white">fas fa-shopping-cart</v-icon>
-              <span class="menu-text">{{ $t('common.menu.shop') }}</span>
-            </v-btn>
             <v-btn icon color="white" :href="`https://www.facebook.com/Cuisine2Geek`">
               <v-icon>fab fa-facebook</v-icon>
             </v-btn>
@@ -54,7 +60,7 @@
           <v-col :lg="7" :md="7" :sm="12">
             <nuxt />
           </v-col>
-          <v-col :lg="4" :md="4" :sm="12" offset-md="1" :offset-sm="0" class="">
+          <v-col :lg="4" :md="4" :sm="12" offset-md="1" :offset-sm="0" class>
             <!-- Widgets -->
             <carousel-shop></carousel-shop>
             <adsense></adsense>
@@ -102,10 +108,26 @@ export default defineComponent({
     })
 
     const title = ref('Cuisine De Geek')
+
+    const slugUrl = () => {
+      const Cookie = process.client ? require('js-cookie') : undefined
+      const cookieLang = process.client ? (Cookie.get('i18n_redirected') ? Cookie.get('i18n_redirected') : null) : null
+
+      let slugUrl = null
+
+      if (cookieLang && cookieLang !== ctx.root.$i18n.defaultLocale) {
+        slugUrl = '/' + cookieLang
+      } else {
+        slugUrl = '/'
+      }
+      return slugUrl
+    }
+
     return {
       title,
       goDark,
-      locale
+      locale,
+      slugUrl
     }
   }
 })

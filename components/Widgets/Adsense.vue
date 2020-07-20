@@ -14,14 +14,14 @@
           data-full-width-responsive="true"
         ></ins>
         <script>
-          ;(adsbygoogle = window.adsbygoogle || []).push({})
+  ;(adsbygoogle = window.adsbygoogle || []).push({})
         </script>
       </v-card-text>
     </template>
   </v-card>
 </template>
 
-<script lang="ts">
+    <script lang="ts">
 import { defineComponent, reactive, onMounted, ref, computed } from '@vue/composition-api'
 
 export default defineComponent({
