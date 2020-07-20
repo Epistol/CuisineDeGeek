@@ -1,19 +1,34 @@
 <template>
   <div>
-    <v-chip class="mr-2" v-if="getTimes(article.acf).prepTime > 0">
-      <v-icon size="medium" class="ml-1" left>{{ bowlIcon }}</v-icon>
-      <template>{{ getTimes(article.acf).prepTime }} mn</template>
-    </v-chip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-chip class="mr-2" v-if="getTimes(article.acf).prepTime > 0" v-on="on">
+          <v-icon size="medium" class="ml-1" left>{{ bowlIcon }}</v-icon>
+          <template>{{ getTimes(article.acf).prepTime }} {{ $t('common.recipe.minutes') }}</template>
+        </v-chip>
+      </template>
+      <span>{{ $t('common.recipe.time.prep') }}</span>
+    </v-tooltip>
 
-    <v-chip class="mr-2" v-if="getTimes(article.acf).cookTime > 0">
-      <v-icon size="medium" class="ml-1" left>{{ stoveIcon }}</v-icon>
-      <template>{{ getTimes(article.acf).cookTime }} mn</template>
-    </v-chip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-chip class="mr-2" v-if="getTimes(article.acf).cookTime > 0" v-on="on">
+          <v-icon size="medium" class="ml-1" left>{{ stoveIcon }}</v-icon>
+          <template>{{ getTimes(article.acf).cookTime }} {{ $t('common.recipe.minutes') }}</template>
+        </v-chip>
+      </template>
+      <span>{{ $t('common.recipe.time.cook') }}</span>
+    </v-tooltip>
 
-    <v-chip class="mr-2" v-if="getTimes(article.acf).restTime > 0">
-      <v-icon size="medium" class="ml-1" left>{{ coffeeIcon }}</v-icon>
-      <template>{{ getTimes(article.acf).restTime }} mn</template>
-    </v-chip>
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-chip class="mr-2" v-if="getTimes(article.acf).restTime > 0" v-on="on">
+          <v-icon size="medium" class="ml-1" left>{{ coffeeIcon }}</v-icon>
+          <template>{{ getTimes(article.acf).restTime }} {{ $t('common.recipe.minutes') }}</template>
+        </v-chip>
+      </template>
+      <span>{{ $t('common.recipe.time.rest') }}</span>
+    </v-tooltip>
   </div>
 </template>
 

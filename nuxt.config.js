@@ -26,10 +26,16 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: siteTitle || '' }
+      { name: 'theme-color', content: '#f7a072' },
+      { name: 'robots', content: 'index,follow' },
+      { name: 'googlebot', content: 'index,follow' },
+      { hid: 'description', name: 'description', content: siteTitle || '' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'alternate', hreflang: 'fr', href: '/fr' },
+      { rel: 'alternate', hreflang: 'ja', href: '/ja' },
+      { rel: 'me', href: 'mailto:contact@cuisinedegeek.com' },
     ]
   },
   /*

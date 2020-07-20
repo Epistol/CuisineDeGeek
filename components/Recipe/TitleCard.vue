@@ -6,7 +6,7 @@
         <div class="text--primary">
           <Metas :data="data"></Metas>
           <!-- Times -->
-          <TimePills :article="data"></TimePills>
+          <TimePills :article="data" class="pt-4"></TimePills>
           <div class="content" v-html="data.content.rendered"></div>
         </div>
       </v-card-text>

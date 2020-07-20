@@ -16,12 +16,16 @@
                 <span class="menu-text">{{ $t('common.menu.recipe') }}</span>
               </v-btn>
             </nuxt-link>
-            <nuxt-link :to="slugUrl()">
+            <!-- <nuxt-link :to="slugUrl()">
               <v-btn text>
                 <v-icon left color="white">fas fa-hat-wizard</v-icon>
                 <span class="menu-text">{{ $t('common.menu.universe') }}</span>
               </v-btn>
-            </nuxt-link>
+            </nuxt-link>-->
+            <v-btn text href="https://cuisinedegeek.com/shop">
+              <v-icon left color="white">fas fa-shopping-cart</v-icon>
+              <span class="menu-text">{{ $t('common.menu.shop') }}</span>
+            </v-btn>
           </v-col>
           <v-col :lg="6" :md="6" :sm="12" align="center" justify="center">
             <nuxt-link :to="slugUrl()">
@@ -37,10 +41,6 @@
             class="items-center justify-center hidden-sm-and-down"
             sm="0"
           >
-            <v-btn text href="https://cuisinedegeek.com/shop">
-              <v-icon left color="white">fas fa-shopping-cart</v-icon>
-              <span class="menu-text">{{ $t('common.menu.shop') }}</span>
-            </v-btn>
             <v-btn icon color="white" :href="`https://www.facebook.com/Cuisine2Geek`">
               <v-icon>fab fa-facebook</v-icon>
             </v-btn>

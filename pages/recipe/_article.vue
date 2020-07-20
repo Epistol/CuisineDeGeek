@@ -18,6 +18,11 @@ import StructuredData from '~/components/Recipe/StructuredData.vue'
 export default defineComponent({
   name: 'PageArticle',
   layout: 'content',
+  head() {
+    return {
+      // title: this.article[0] ? this.article[0].title.rendered + ' - Cuisine De Geek' : 'Cuisine De Geek',
+    }
+  },
   components: {
     Recipe,
     StructuredData

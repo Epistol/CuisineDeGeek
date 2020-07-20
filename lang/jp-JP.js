@@ -8,7 +8,15 @@ export default {
     "recipe": {
       "last": "レシピ | 最新のレシピ",
       "ingredient": "成分 | 材料",
-      "step": "ステップ | 手順"
+      "step": "ステップ | 手順",
+      "difficulty": "困難",
+      "servings": "サービング",
+      "minutes": "分",
+      "time": {
+        "prep": "準備時間",
+        "cook": "調理時間",
+        "rest": "休憩時間",
+      }
     },
     "menu": {
       "recipe": "レシピ",
