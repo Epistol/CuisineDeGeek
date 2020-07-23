@@ -85,7 +85,6 @@ export default defineComponent({
         }
       }
 
-      console.log('getRecipeStructuredData -> structuredData', structuredData)
       return structuredData
     }
 

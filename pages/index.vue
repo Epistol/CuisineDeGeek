@@ -4,6 +4,7 @@
       <!-- <TheHero :hero-article="articlesList[0]" /> -->
       <h1 class v-cloak>{{ $tc('common.recipe.last', articles.length) }}</h1>
       <ArticleList :articles="articles" />
+      <Newsletter></Newsletter>
     </div>
   </div>
 </template>
@@ -12,13 +13,15 @@
 import { defineComponent, reactive, onMounted } from '@vue/composition-api'
 import usePosts from '~/composables/use-posts'
 import ArticleList from '~/components/Article/ArticleList.vue'
+import Newsletter from '~/components/Widgets/Newsletter.vue'
 
 export default defineComponent({
   name: 'Index',
   layout: 'content',
 
   components: {
-    ArticleList
+    ArticleList,
+    Newsletter
   },
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {

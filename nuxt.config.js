@@ -108,7 +108,11 @@ export default {
   axios: {
     proxy: true
   },
-
+  proxy: {
+    '/api/newsletter/subscribe': {
+      target: 'https://cuisinedegeek.us17.list-manage.com/subscribe/post?u=ab342c65399cf46191cfe0ac8&amp;id=78d555f792m',
+    }
+  },
 
   /*
   ** vuetify module configuration

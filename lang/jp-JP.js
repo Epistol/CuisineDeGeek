@@ -1,6 +1,7 @@
 export default {
   "common": {
     "comments": "コメント",
+    "subscribe": "申し込む",
     "ads": {
       "title": "宣伝",
       "shop": "🛒 ショップ"

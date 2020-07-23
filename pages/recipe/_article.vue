@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onMounted } from '@vue/composition-api'
+import { defineComponent, ref, reactive, onMounted } from '@vue/composition-api'
 import usePosts from '~/composables/use-posts'
 import Recipe from '~/components/Recipe/Recipe.vue'
 import StructuredData from '~/components/Recipe/StructuredData.vue'
@@ -20,9 +20,14 @@ export default defineComponent({
   layout: 'content',
   head() {
     return {
-      // title: this.article[0] ? this.article[0].title.rendered + ' - Cuisine De Geek' : 'Cuisine De Geek',
+      title: `${this.title}`,
+      meta: [
+        { name: 'og:title', content: `${this.title}`, hid: 'og:title' },
+        { name: 'og:description', content: `${this.title}`, hid: 'og:description' }
+      ]
     }
   },
+
   components: {
     Recipe,
     StructuredData
@@ -32,12 +37,16 @@ export default defineComponent({
   setup(props, ctx) {
     const { fetchArticleForUserLang, article } = usePosts({ ctx })
     const slug = ctx.root.$route.params?.article
+    let title = ref('Cuisine De Geek')
 
     onMounted(async () => {
       await fetchArticleForUserLang({ articleSlug: slug, subcategory: 'recipe' })
+      if (article.value) {
+        title.value = article.value[0].title.rendered
+      }
     })
 
-    return { article }
+    return { article, title }
   }
 })
 </script>

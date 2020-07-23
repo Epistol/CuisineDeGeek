@@ -1,6 +1,7 @@
 export default {
   "common": {
     "comments": "Comments",
+    "subscribe": "Subscribe",
     "ads": {
       "title": "Advertisement",
       "shop": "🛒 Shop"
