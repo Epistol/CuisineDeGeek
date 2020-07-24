@@ -4,7 +4,7 @@
       <!-- <TheHero :hero-article="articlesList[0]" /> -->
       <h1 class v-cloak>{{ $tc('common.recipe.last', articles.length) }}</h1>
       <ArticleList :articles="articles" />
-      <Newsletter></Newsletter>
+      <!-- <Newsletter></Newsletter> -->
     </div>
   </div>
 </template>
