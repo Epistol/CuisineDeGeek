@@ -23,7 +23,9 @@ export default defineComponent({
       title: `${this.title}`,
       meta: [
         { name: 'og:title', content: `${this.title}`, hid: 'og:title' },
-        { name: 'og:description', content: `${this.title}`, hid: 'og:description' }
+        { name: 'og:description', content: `${this.title}`, hid: 'og:description' },
+        { name: 'og:image', content: `${this.image}`, hid: 'og:image' },
+        { name: 'og:image:alt', content: `${this.imageCaption}`, hid: 'og:image:alt' }
       ]
     }
   },
@@ -38,15 +40,32 @@ export default defineComponent({
     const { fetchArticleForUserLang, article } = usePosts({ ctx })
     const slug = ctx.root.$route.params?.article
     let title = ref('Cuisine De Geek')
+    let image = ref('')
+    let imageCaption = ref('')
+
+    const loadFullDataset = async (val: any) => {
+      const { data } = await ctx.root.$axios.get(val)
+      console.log('loadFullDataset -> data', data)
+      return data
+    }
 
     onMounted(async () => {
       await fetchArticleForUserLang({ articleSlug: slug, subcategory: 'recipe' })
       if (article.value) {
         title.value = article.value[0].title.rendered
+        console.log('article.value[0', article.value[0]['_links'])
+        if (article.value[0]['_links']) {
+          const recipePictures = await loadFullDataset(article.value[0]['_links']['wp:featuredmedia'][0].href)
+
+          if (recipePictures) {
+            image.value = recipePictures.source_url
+            imageCaption.value = recipePictures.caption.rendered
+          }
+        }
       }
     })
 
-    return { article, title }
+    return { article, title, image, loadFullDataset, imageCaption }
   }
 })
 </script>

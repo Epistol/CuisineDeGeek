@@ -30,6 +30,10 @@ export default {
       { name: 'robots', content: 'index,follow' },
       { name: 'googlebot', content: 'index,follow' },
       { hid: 'description', name: 'description', content: siteTitle || '' },
+      { hid: 'og:site_name', name: 'title', content: siteTitle },
+      { hid: 'twitter:card', name: 'twitter:card', content: 'summary' },
+      { hid: 'twitter:site', name: 'twitter:site', content: '@CuisineDeGeek' },
+      { hid: 'twitter:description', name: 'twitter:description', content: siteTitle },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
