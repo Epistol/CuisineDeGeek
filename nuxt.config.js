@@ -2,6 +2,8 @@ import colors from 'vuetify/es5/util/colors'
 import axios from 'axios'
 
 const siteTitle = 'Cuisine De Geek'
+const ogImage = process.env.BASE_URL + '/ogimage.png'
+
 export default {
   mode: 'universal',
 
@@ -29,8 +31,9 @@ export default {
       { name: 'theme-color', content: '#f7a072' },
       { name: 'robots', content: 'index,follow' },
       { name: 'googlebot', content: 'index,follow' },
-      { hid: 'description', name: 'description', content: siteTitle || '' },
-      { hid: 'og:site_name', name: 'title', content: siteTitle },
+      { hid: 'og:site_name', name: 'og:site_name', content: siteTitle },
+      { hid: 'og:title', name: 'og:title', content: siteTitle },
+      { hid: 'og:image', name: 'og:image', content: ogImage },
       { hid: 'twitter:card', name: 'twitter:card', content: 'summary' },
       { hid: 'twitter:site', name: 'twitter:site', content: '@CuisineDeGeek' },
       { hid: 'twitter:description', name: 'twitter:description', content: siteTitle },

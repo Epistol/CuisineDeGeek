@@ -99,6 +99,16 @@ export default defineComponent({
     CarouselShop,
     Adsense
   },
+  head() {
+    return {
+      meta: [
+        { name: 'og:locale', content: this.locale, hid: 'og:locale' },
+        { hid: 'description', name: 'description', content: this.description || 'Cuisine De Geek' },
+        { hid: 'og:description', name: 'og:description', content: this.description || 'Cuisine De Geek' }
+      ]
+    }
+  },
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setup(props, ctx) {
     let goDark = ref<boolean>(false)
@@ -106,6 +116,8 @@ export default defineComponent({
     watch(goDark, (value, prevValue) => {
       ctx.root.$vuetify.theme.dark = value
     })
+
+    const description = ctx.root.$i18n.t('common.meta.description')
 
     const title = ref('Cuisine De Geek')
 
@@ -127,7 +139,8 @@ export default defineComponent({
       title,
       goDark,
       locale,
-      slugUrl
+      slugUrl,
+      description
     }
   }
 })

@@ -1,11 +1,8 @@
 <template>
   <div>
-    <nuxt-link
-      v-for="(locale,i) in availableLocales "
-      :key="i"
-      :to="switchLocalePath(locale.code)"
-      class="mr-4"
-    >{{ locale.name }}</nuxt-link>
+    <nuxt-link v-for="(locale, i) in availableLocales" :key="i" :to="switchLocalePath(locale.code)" class="mr-4">{{
+      locale.name
+    }}</nuxt-link>
   </div>
 </template>
 
@@ -23,12 +20,7 @@ export default defineComponent({
       // @ts-ignore
       ctx.root.$i18n.locales.filter(locale => locale.code !== ctx.root.$i18n.locale)
     )
-    const changeLocale = async (locale: string) => {
-      // ctx.root.$i18n.setLocaleCookie(locale)
-      console.log('we entered changeLocale')
-      // ctx.root.$router.push(await ctx.root.switchLocalePath(locale))
-    }
-    return { availableLocales, changeLocale }
+    return { availableLocales }
   }
 })
 </script>
