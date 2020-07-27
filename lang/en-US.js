@@ -1,5 +1,8 @@
 export default {
   "common": {
+    "meta": {
+      "description": "Cuisine De Geek is a resource of recipes and cooking news inspired by imaginary worlds."
+    },
     "comments": "Comments",
     "subscribe": "Subscribe",
     "ads": {

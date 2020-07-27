@@ -2,6 +2,7 @@ import colors from 'vuetify/es5/util/colors'
 import axios from 'axios'
 
 const siteTitle = 'Cuisine De Geek'
+
 export default {
   mode: 'universal',
 
@@ -29,14 +30,22 @@ export default {
       { name: 'theme-color', content: '#f7a072' },
       { name: 'robots', content: 'index,follow' },
       { name: 'googlebot', content: 'index,follow' },
-      { hid: 'description', name: 'description', content: siteTitle || '' },
-      { hid: 'og:site_name', name: 'title', content: siteTitle },
-      { hid: 'twitter:card', name: 'twitter:card', content: 'summary' },
+      // -- OpenGraph --
+      { hid: 'og:site_name', name: 'og:site_name', content: siteTitle },
+      { hid: 'og:title', name: 'og:title', content: siteTitle },
+      { hid: 'theme-color', name: 'theme-color', content: '#f7a072' },
+      { hid: 'mobile-web-app-capable', name: 'tmobile-web-app-capable', content: 'yes' },
+      // -- Twitter --
+      { hid: 'twitter:title', name: 'twitter:title', content: siteTitle },
+      { hid: 'apple-mobile-web-app-title', name: 'apple-mobile-web-app-title', content: siteTitle },
+      { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
       { hid: 'twitter:site', name: 'twitter:site', content: '@CuisineDeGeek' },
       { hid: 'twitter:description', name: 'twitter:description', content: siteTitle },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'apple-touch-icon', href: '/ogimage.png' },
+      { rel: 'apple-touch-startup-image', href: '/ogimage.png' },
       { rel: 'alternate', hreflang: 'fr', href: '/fr' },
       { rel: 'alternate', hreflang: 'ja', href: '/ja' },
       { rel: 'me', href: 'mailto:contact@cuisinedegeek.com' },
@@ -45,7 +54,7 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: { color: '#f7a072' },
   /*
   ** Global CSS
   */

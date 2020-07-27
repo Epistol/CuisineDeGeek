@@ -23,9 +23,13 @@ export default defineComponent({
       title: `${this.title}`,
       meta: [
         { name: 'og:title', content: `${this.title}`, hid: 'og:title' },
+        { name: 'twitter:title', content: `${this.title}`, hid: 'twitter:title' },
         { name: 'og:description', content: `${this.title}`, hid: 'og:description' },
+        { name: 'twitter:description', content: `${this.title}`, hid: 'twitter:description' },
         { name: 'og:image', content: `${this.image}`, hid: 'og:image' },
-        { name: 'og:image:alt', content: `${this.imageCaption}`, hid: 'og:image:alt' }
+        { name: 'twitter:image', content: `${this.image}`, hid: 'twitter:image' },
+        { name: 'og:image:alt', content: `${this.imageCaption}`, hid: 'og:image:alt' },
+        { name: 'twitter:image:alt', content: `${this.imageCaption}`, hid: 'twitter:image:alt' }
       ]
     }
   },
@@ -45,7 +49,6 @@ export default defineComponent({
 
     const loadFullDataset = async (val: any) => {
       const { data } = await ctx.root.$axios.get(val)
-      console.log('loadFullDataset -> data', data)
       return data
     }
 

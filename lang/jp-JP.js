@@ -1,5 +1,8 @@
 export default {
   "common": {
+    "meta": {
+      "description": "Cuisine De Geekは、架空の世界に触発されたレシピや料理のニュースのリソースです。"
+    },
     "comments": "コメント",
     "subscribe": "申し込む",
     "ads": {
