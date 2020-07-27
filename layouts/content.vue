@@ -81,7 +81,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, computed } from '@vue/composition-api'
+import { defineComponent, ref, watch, computed, onMounted } from '@vue/composition-api'
 import footerMenu from '~/components/Menu/FooterMenu.vue'
 import LangSwitcher from '~/components/Menu/LangSwitcher.vue'
 import SearchBar from '~/components/SearchBar.vue'
@@ -102,9 +102,12 @@ export default defineComponent({
   head() {
     return {
       meta: [
+        { name: 'op:markup_version', content: 'v1.0', hid: 'op:markup_version' },
         { name: 'og:locale', content: this.locale, hid: 'og:locale' },
         { hid: 'description', name: 'description', content: this.description || 'Cuisine De Geek' },
-        { hid: 'og:description', name: 'og:description', content: this.description || 'Cuisine De Geek' }
+        { hid: 'og:description', name: 'og:description', content: this.description || 'Cuisine De Geek' },
+        { hid: 'twitter:url', name: 'twitter:url', content: this.url },
+        { hid: 'twitter:description', name: 'twitter:description', content: this.description || 'Cuisine De Geek' }
       ]
     }
   },
@@ -118,8 +121,8 @@ export default defineComponent({
     })
 
     const description = ctx.root.$i18n.t('common.meta.description')
-
     const title = ref('Cuisine De Geek')
+    let url = ref('')
 
     const slugUrl = () => {
       const Cookie = process.client ? require('js-cookie') : undefined
@@ -135,12 +138,20 @@ export default defineComponent({
       return slugUrl
     }
 
+    onMounted(async () => {
+      if (typeof window !== 'undefined') {
+        const localeUrl = computed(() => window.location.href)
+        url.value = localeUrl.value
+      }
+    })
+
     return {
       title,
       goDark,
       locale,
       slugUrl,
-      description
+      description,
+      url
     }
   }
 })
