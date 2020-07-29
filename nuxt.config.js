@@ -34,7 +34,7 @@ export default {
       { hid: 'og:site_name', name: 'og:site_name', content: siteTitle },
       { hid: 'og:title', name: 'og:title', content: siteTitle },
       { hid: 'theme-color', name: 'theme-color', content: '#f7a072' },
-      { hid: 'mobile-web-app-capable', name: 'tmobile-web-app-capable', content: 'yes' },
+      { hid: 'mobile-web-app-capable', name: 'mobile-web-app-capable', content: 'yes' },
       // -- Twitter --
       { hid: 'twitter:title', name: 'twitter:title', content: siteTitle },
       { hid: 'apple-mobile-web-app-title', name: 'apple-mobile-web-app-title', content: siteTitle },
@@ -112,7 +112,13 @@ export default {
         langDir: 'lang/'
       }
     ],
+    '@nuxtjs/sitemap',
   ],
+
+  sitemap: {
+    hostname: 'https://cuisinedegeek.com',
+    gzip: true,
+  },
 
   /*
   ** Axios module configuration
