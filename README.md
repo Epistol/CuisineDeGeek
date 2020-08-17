@@ -1,6 +1,8 @@
 # cdg_front
 
 > CDG front-end
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b35b93ca-5023-4a67-b342-70d9990e98b7/deploy-status)](https://app.netlify.com/sites/laughing-ritchie-95b3fd/deploys
+
 
 ## Build Setup
 

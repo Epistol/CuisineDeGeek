@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es2018",
+    "target": "es2020",
     "module": "esnext",
     "moduleResolution": "node",
     "lib": [
@@ -18,23 +18,33 @@
     "baseUrl": ".",
     "paths": {
       "~/*": [
-        "./*"
+        "./src/*"
       ],
       "@/*": [
-        "./*"
-      ]
+        "./src/*"
+      ],
+      "~~/*": ["./*"],
+      "@@/*": ["./*"]
     },
     "types": [
-      "@types/node",
+      "./types",
       "@nuxt/types",
+      "@types/node",
+      "@types/webpack-env",
       "@nuxtjs/axios",
       "@nuxtjs/vuetify",
       "nuxt-i18n"
-    ]
+    ],
+    "skipLibCheck": true,
   },
   "exclude": [
     "node_modules",
     ".nuxt",
     "dist"
-  ]
+  ],
+  "globals": {
+    "it": false,
+    "expect": false
+  },
+  "allowSyntheticDefaultImports": true
 }
