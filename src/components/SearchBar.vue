@@ -19,7 +19,7 @@
           ></v-text-field>
         </v-col>
       </v-row>
-      <div class="absolute z-10 w-1/4 pt-2" v-if="items.length && search && focused">
+      <div class="absolute z-10 w-1/4 pt-2 shadow" v-if="items.length && search && focused">
         <v-expand-transition>
           <v-list
             v-if="items.length && search"

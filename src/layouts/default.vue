@@ -3,13 +3,7 @@
     <header class="toolbar">
       <v-container>
         <v-row align="center" justify="center">
-          <v-col
-            align="center"
-            justify="center"
-            class="items-center justify-center hidden-sm-and-down"
-            cols="3"
-            sm="0"
-          >
+          <v-col align="center" justify="center" class="items-center justify-center hidden-sm-and-down" cols="3" sm="0">
             <nuxt-link :to="slugUrl()">
               <v-btn text>
                 <v-icon left color="white">fa-utensils</v-icon>
@@ -81,7 +75,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, computed } from '@vue/composition-api'
+import { defineComponent, ref, watch, computed, onMounted } from '@vue/composition-api'
 import footerMenu from '~/components/Menu/FooterMenu.vue'
 import LangSwitcher from '~/components/Menu/LangSwitcher.vue'
 import SearchBar from '~/components/SearchBar.vue'
@@ -102,12 +96,12 @@ export default defineComponent({
   head() {
     return {
       meta: [
+        { name: 'op:markup_version', content: 'v1.0', hid: 'op:markup_version' },
         { name: 'og:locale', content: this.locale, hid: 'og:locale' },
         { hid: 'description', name: 'description', content: this.description || 'Cuisine De Geek' },
         { hid: 'og:description', name: 'og:description', content: this.description || 'Cuisine De Geek' },
-        { hid: 'twitter:description', name: 'twitter:description', content: this.description || 'Cuisine De Geek' },
-        { hid: 'og:image', name: 'og:image', content: this.ogImage },
-        { hid: 'twitter:url', name: 'twitter:url', content: this.url }
+        { hid: 'twitter:url', name: 'twitter:url', content: this.url },
+        { hid: 'twitter:description', name: 'twitter:description', content: this.description || 'Cuisine De Geek' }
       ]
     }
   },
@@ -121,10 +115,8 @@ export default defineComponent({
     })
 
     const description = ctx.root.$i18n.t('common.meta.description')
-    const ogImage = process.env.BASE_URL + '/ogimage.png'
-
     const title = ref('Cuisine De Geek')
-    const url = computed(() => window.location.href)
+    let url = ref('')
 
     const slugUrl = () => {
       const Cookie = process.client ? require('js-cookie') : undefined
@@ -139,6 +131,13 @@ export default defineComponent({
       }
       return slugUrl
     }
+
+    onMounted(async () => {
+      if (typeof window !== 'undefined') {
+        const localeUrl = computed(() => window.location.href)
+        url.value = localeUrl.value
+      }
+    })
 
     return {
       title,
