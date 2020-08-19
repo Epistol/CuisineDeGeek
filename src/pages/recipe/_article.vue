@@ -17,7 +17,6 @@ import StructuredData from '~/components/Recipe/StructuredData.vue'
 
 export default defineComponent({
   name: 'PageArticle',
-  layout: 'content',
   head() {
     return {
       title: `${this.title}`,

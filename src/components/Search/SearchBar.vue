@@ -8,18 +8,18 @@
             solo
             rounded
             hide-details
-            append-icon="fas fa-search"
+            :append-icon="searchIcon()"
             v-model="search"
             flat
             @input="debouncedInput('recipe')"
             @keydown.enter="redirectToSearchResults(search)"
-            @click:append="redirectToSearchResults(search)"
+            @click:append="redirectOrEmpty(search)"
             @focus="focused = true"
             @blur="focused = false"
           ></v-text-field>
         </v-col>
       </v-row>
-      <div class="absolute z-10 w-1/4 pt-2" v-if="items.length && search && focused">
+      <div class="absolute z-10 w-1/4 pt-2 shadow" v-if="items.length && search && focused">
         <v-expand-transition>
           <v-list
             v-if="items.length && search"
@@ -90,12 +90,24 @@ export default defineComponent({
       }
     }
 
-    const redirectToRecipe = async (val: any) => {
+    const redirectToRecipe = async (val: string) => {
       ctx.root.$router.push(val)
     }
 
     const redirectToSearchResults = (val: any) => {
       ctx.root.$router.push({ path: 'search', query: { query: val } })
+    }
+
+    const searchIcon = () => {
+      return search.value ? 'fas fa-times' : 'fas fa-search'
+    }
+
+    const redirectOrEmpty = async (val: string) => {
+      if (search.value) {
+        search.value = null
+      } else {
+        redirectToRecipe(val)
+      }
     }
 
     return {
@@ -108,7 +120,9 @@ export default defineComponent({
       setItemClick,
       redirectToRecipe,
       redirectToSearchResults,
-      focused
+      focused,
+      searchIcon,
+      redirectOrEmpty
     }
   }
 })

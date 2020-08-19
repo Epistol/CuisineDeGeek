@@ -17,7 +17,6 @@ import Newsletter from '~/components/Widgets/Newsletter.vue'
 
 export default defineComponent({
   name: 'Index',
-  layout: 'content',
 
   components: {
     ArticleList,

@@ -5,24 +5,20 @@
         {{ $t('common.search.title') }}
         <span class="italic">{{query}}</span>
       </h1>
-      <div class="pt-2" v-if="items.length">
-        <template v-for="(item,i) in items">
-          <Result :item="item" :key="i" />
-        </template>
+      <div v-if="items.length" class="pt-2" v-cloak>
+        <Result :item="item" :key="i" v-for="(item,i) in items" />
       </div>
-      <div v-else class="mx-auto">
+      <div v-else class="mx-auto" v-cloak>
         <a href="/">
           <div class="w-1/4 mx-auto">
             <img data-src="/cat-lost.png" v-lazy-load />
           </div>
         </a>
         <div class="w-3/4 mx-auto mt-10 text-center">
-          <span class="mt-6 text-xl font-bold">No results found</span>
+          <span class="mt-6 text-xl font-bold">{{ $t('common.search.no-result') }}</span>
           <p>
-            It seems we can’t find any results based on your search,
-            <a
-              href="/"
-            >but you can check out the homepage</a>
+            {{ $t('common.search.not-found') }}
+            <a href="/">{{ $t('common.search.but-others') }}</a>
           </p>
         </div>
       </div>
@@ -36,7 +32,7 @@ import { defineComponent, ref, watch, computed, onMounted } from '@vue/compositi
 import usePosts from '~/composables/use-posts'
 import useSearch from '~/composables/use-search'
 import ArticleList from '~/components/Article/ArticleList.vue'
-import Result from '~/components/Article/Result.vue'
+import Result from '~/components/Search/Result.vue'
 
 export default defineComponent({
   name: 'SearchResults',
@@ -60,6 +56,7 @@ export default defineComponent({
     } = useSearch({ ctx })
 
     const items = computed(() => searchResults.value)
+    console.log('setup -> items', items)
 
     const getSearchResults = async (subtype: string) => {
       // Items have already been requested
