@@ -28,7 +28,10 @@ export default {
       "shop": "Shop"
     },
     "search": {
-      "title": "Results for "
+      "title": "Results for ",
+      "no-result": "No results found",
+      "not-found": "It seems we can’t find any results based on your search,",
+      "but-others": "but you can check out the homepage to see more recipes !"
     }
   }
 }

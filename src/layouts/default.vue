@@ -3,7 +3,13 @@
     <header class="toolbar">
       <v-container>
         <v-row align="center" justify="center">
-          <v-col align="center" justify="center" class="items-center justify-center hidden-sm-and-down" cols="3" sm="0">
+          <v-col
+            align="center"
+            justify="center"
+            class="items-center justify-center hidden-sm-and-down"
+            cols="3"
+            sm="0"
+          >
             <nuxt-link :to="slugUrl()">
               <v-btn text>
                 <v-icon left color="white">fa-utensils</v-icon>
@@ -78,7 +84,7 @@
 import { defineComponent, ref, watch, computed, onMounted } from '@vue/composition-api'
 import footerMenu from '~/components/Menu/FooterMenu.vue'
 import LangSwitcher from '~/components/Menu/LangSwitcher.vue'
-import SearchBar from '~/components/SearchBar.vue'
+import SearchBar from '~/components/Search/SearchBar.vue'
 import Cookies from '~/components/Cookies.vue'
 import CarouselShop from '~/components/Widgets/CarouselShop.vue'
 import Adsense from '~/components/Widgets/Adsense.vue'

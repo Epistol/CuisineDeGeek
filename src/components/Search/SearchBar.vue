@@ -8,12 +8,12 @@
             solo
             rounded
             hide-details
-            append-icon="fas fa-search"
+            :append-icon="searchIcon()"
             v-model="search"
             flat
             @input="debouncedInput('recipe')"
             @keydown.enter="redirectToSearchResults(search)"
-            @click:append="redirectToSearchResults(search)"
+            @click:append="redirectOrEmpty(search)"
             @focus="focused = true"
             @blur="focused = false"
           ></v-text-field>
@@ -90,12 +90,24 @@ export default defineComponent({
       }
     }
 
-    const redirectToRecipe = async (val: any) => {
+    const redirectToRecipe = async (val: string) => {
       ctx.root.$router.push(val)
     }
 
     const redirectToSearchResults = (val: any) => {
       ctx.root.$router.push({ path: 'search', query: { query: val } })
+    }
+
+    const searchIcon = () => {
+      return search.value ? 'fas fa-times' : 'fas fa-search'
+    }
+
+    const redirectOrEmpty = async (val: string) => {
+      if (search.value) {
+        search.value = null
+      } else {
+        redirectToRecipe(val)
+      }
     }
 
     return {
@@ -108,7 +120,9 @@ export default defineComponent({
       setItemClick,
       redirectToRecipe,
       redirectToSearchResults,
-      focused
+      focused,
+      searchIcon,
+      redirectOrEmpty
     }
   }
 })

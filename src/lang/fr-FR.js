@@ -28,7 +28,9 @@ export default {
       "shop": "Boutique"
     },
     "search": {
-      "title": "Résultats pour "
+      "title": "Résultats pour ",
+      "not-found": "Il semble que nous ne trouvions aucun résultat en fonction de votre recherche,",
+      "but-others": "mais vous pouvez consulter la page d'accueil pour voir d'autres recettes !"
     }
   }
 }
