@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Configuration } from '@nuxt/types'
 import head from './config/head'
 import modules from './config/modules'
+var path = require('path')
 
 declare module NuxtConfiguration {
   interface NuxtOptions extends Configuration {
@@ -128,6 +129,11 @@ const config: any = {
    ** Build configuration
    */
   build: {
+    postcss: {
+      plugins: {
+        tailwindcss: path.resolve(__dirname, './tailwind.config.js')
+      }
+    },
     /*
      ** You can extend webpack config here
      */
