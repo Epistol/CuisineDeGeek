@@ -125,6 +125,10 @@ const config: any = {
     defaultAssets: { icons: 'fa' }
   },
 
+  purgeCSS: {
+    paths: ['components/**/*.vue', 'layouts/**/*.vue', 'pages/**/*.vue']
+  },
+
   /*
    ** Build configuration
    */
