@@ -44,7 +44,6 @@
                   <Metas :data="propArticle"></Metas>
                 </div>
               </div>
-              <div id="social" class="mt-6"></div>
             </div>
           </div>
         </v-col>
@@ -61,6 +60,7 @@ import Metas from '~/components/Recipe/Metas.vue'
 
 export default defineComponent({
   name: 'ArticleExcerpt',
+  components: { ArticleImage, GlobalTimePill, Metas },
   props: {
     article: Object
   },
