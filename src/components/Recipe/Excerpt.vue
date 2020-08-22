@@ -44,30 +44,7 @@
                   <Metas :data="propArticle"></Metas>
                 </div>
               </div>
-              <div id="social" class="mt-6">
-                <social-sharing
-                  network-selected="facebook"
-                  :article-title="propArticle.title.rendered"
-                  :article-excerpt="propArticle.excerpt.rendered"
-                ></social-sharing>
-                <social-sharing
-                  network-selected="twitter"
-                  :article-title="propArticle.title.rendered"
-                  :article-excerpt="propArticle.excerpt.rendered"
-                ></social-sharing>
-                <!-- <social-sharing
-                      v-if="article._embedded['wp:featuredmedia']"
-                      network-selected="pinterest"
-                      :article-title="propArticle.title.rendered"
-                      :article-excerpt="propArticle.excerpt.rendered"
-                      :article-media="propArticle._links['wp:featuredmedia'][0].href"
-                ></social-sharing>-->
-                <social-sharing
-                  network-selected="email"
-                  :article-title="propArticle.title.rendered"
-                  :article-excerpt="propArticle.excerpt.rendered"
-                ></social-sharing>
-              </div>
+              <div id="social" class="mt-6"></div>
             </div>
           </div>
         </v-col>
@@ -81,11 +58,10 @@ import { defineComponent, ref, toRefs, reactive, computed, onMounted } from '@vu
 import ArticleImage from '~/components/Article/Images/Image.vue'
 import GlobalTimePill from '~/components/Recipe/GlobalTimePill.vue'
 import Metas from '~/components/Recipe/Metas.vue'
-import SocialSharing from '~/components/Article/SocialSharing.vue'
 
 export default defineComponent({
   name: 'ArticleExcerpt',
-  components: { ArticleImage, GlobalTimePill, Metas, SocialSharing },
+  components: { ArticleImage, GlobalTimePill, Metas },
   props: {
     article: Object
   },
