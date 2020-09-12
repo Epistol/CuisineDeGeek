@@ -14,6 +14,11 @@ const config: any = {
   mode: 'universal',
   srcDir: 'src/',
 
+  server: {
+    port: 8383, // par défaut : 3000
+    host: '0.0.0.0' // par défaut : localhost
+  },
+
   generate: {
     fallback: true,
     routes() {
